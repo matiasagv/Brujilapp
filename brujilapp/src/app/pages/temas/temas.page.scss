@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@300;400&display=swap');
+
+ion-content {
+  // Mismo fondo que el Home
+  --background: radial-gradient(circle at 50% 10%, #2a0a38 0%, #0d0214 40%, #000000 100%);
+  font-family: 'Lato', sans-serif;
+}
+
+.main-container {
+  min-height: 100%;
+}
+
+// --- PESTAÑAS ---
+.magic-segment {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  margin-bottom: 25px;
+  border: 1px solid rgba(156, 39, 176, 0.3);
+
+  ion-segment-button {
+    --color: #888;
+    --color-checked: #d4af37;
+    --indicator-color: rgba(74, 20, 140, 0.5);
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-size: 0.8rem;
+  }
+}
+
+// --- GRILLA ---
+.cards-grid {
+  display: flex;
+  flex-direction: column; // Lista vertical para mejor lectura de texto
+  gap: 15px;
+  padding-bottom: 40px;
+}
+
+// --- ESTILO DE CARTA (TEXTO) ---
+.tarot-card-text {
+  background: linear-gradient(145deg, rgba(30, 30, 30, 0.9), rgba(10, 10, 10, 0.95));
+  border: 1px solid #d4af37; // Borde dorado
+  border-radius: 4px; // Bordes más rectos (estilo libro antiguo)
+  padding: 15px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+
+  // Parte izquierda: Número Romano
+  .card-header {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid rgba(212, 175, 55, 0.3); // Separador vertical
+    margin-right: 15px;
+
+    .roman-num {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      color: #d4af37;
+      font-weight: 900;
+      opacity: 0.8;
+    }
+  }
+
+  // Parte derecha: Textos
+  .card-body {
+    flex: 1;
+
+    .card-name {
+      margin: 0;
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .separator {
+      width: 30px;
+      height: 1px;
+      background: #9c27b0; // Línea morada decorativa
+      margin: 5px 0;
+    }
+
+    .card-keyword {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #aaa;
+      font-style: italic;
+    }
+  }
+
+  // ESTILO ESPECÍFICO PARA ARCANOS MENORES
+  &.minor {
+    border-color: rgba(156, 39, 176, 0.5); // Borde morado para menores
+
+    .card-header-minor {
+      width: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-right: 1px solid rgba(156, 39, 176, 0.3);
+      margin-right: 15px;
+
+      .suit-name {
+        font-family: 'Cinzel', serif;
+        font-size: 0.6rem;
+        color: #e0d1ff;
+        text-transform: uppercase;
+        writing-mode: vertical-rl; // Texto vertical
+        transform: rotate(180deg); // Orientación correcta
+        letter-spacing: 2px;
+      }
+    }
+  }
+}

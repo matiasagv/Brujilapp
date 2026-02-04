@@ -105,9 +105,9 @@ ion-content {
     padding: 20px 15px;
   }
 
-  // --- CONFIGURACIÓN DE TUS ICONOS PNG ---
+  // --- CONFIGURACIÓN DE TUS ICONOS PNG (CORREGIDO) ---
   .icon-box {
-    width: 50px; // Un poco más grande para que la imagen respire
+    width: 50px; 
     height: 50px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.05);
@@ -115,15 +115,28 @@ ion-content {
     align-items: center;
     justify-content: center;
     margin-bottom: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    // Cambié el borde a un dorado sutil para que combine con el icono brillante
+    border: 1px solid rgba(212, 175, 55, 0.3); 
 
     // Regla para tus imágenes PNG
     img {
-      width: 70%; // Ocupa el 70% del círculo
-      height: 70%;
-      object-fit: contain; // Mantiene la proporción original
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); // Sombra suave
+      width: 65%; // Un pelín más chico para que el brillo no se corte
+      height: 65%;
+      object-fit: contain; 
+      
+      // AQUÍ ESTÁ EL TRUCO:
+      // brightness(0) pone el icono negro.
+      // invert(1) lo vuelve blanco puro.
+      // drop-shadow le da el brillo dorado.
+      filter: brightness(0) invert(1) drop-shadow(0 0 2px rgba(212, 175, 55, 0.8));
+      opacity: 0.95;
+      transition: transform 0.3s ease;
     }
+  }
+
+  // Efecto extra: al tocar la tarjeta, el icono crece un poquito
+  &:active .icon-box img {
+    transform: scale(1.1);
   }
 
   ion-card-title {
@@ -219,10 +232,9 @@ ion-content {
       height: 40px;
       margin-bottom: 5px;
       
-      // Aseguramos que la imagen también se ajuste
       img {
-        width: 70%; 
-        height: 70%;
+        width: 65%; 
+        height: 65%;
       }
     }
 

@@ -1,13 +1,55 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>temas</ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: transparent;">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="font-family: 'Cinzel', serif; color: #e0d1ff; font-size: 0.9rem; letter-spacing: 2px;">
+      BIBLIOTECA TAROT
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">temas</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="main-container ion-padding">
+
+    <ion-segment (ionChange)="cambiarSegmento($event)" [value]="segmentoActual" mode="ios" class="magic-segment">
+      <ion-segment-button value="mayores">
+        <ion-label>Arcanos Mayores</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="menores">
+        <ion-label>Arcanos Menores</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div class="cards-grid">
+      
+      <ng-container *ngIf="segmentoActual === 'mayores'">
+        <div class="tarot-card-text" *ngFor="let carta of arcanosMayores">
+          <div class="card-header">
+            <span class="roman-num">{{ carta.romano }}</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-name">{{ carta.nombre }}</h3>
+            <div class="separator"></div>
+            <p class="card-keyword">{{ carta.palabra }}</p>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="segmentoActual === 'menores'">
+        <div class="tarot-card-text minor" *ngFor="let carta of arcanosMenores">
+          <div class="card-header-minor">
+            <span class="suit-name">{{ carta.palo }}</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-name">{{ carta.nombre }}</h3>
+            <div class="separator"></div>
+            <p class="card-keyword">{{ carta.palabra }}</p>
+          </div>
+        </div>
+      </ng-container>
+
+    </div>
+
+  </div>
 </ion-content>
