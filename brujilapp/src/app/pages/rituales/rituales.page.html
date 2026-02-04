@@ -61,8 +61,11 @@
               <span class="section-label">Ingredientes:</span>
               <p class="spell-text">{{ hechizo.materiales }}</p>
 
+              <span class="section-label">Proceso:</span>
+              <p class="spell-text">{{ hechizo.proceso }}</p>
+
               <span class="section-label">Ritual:</span>
-              <p class="spell-text italic">"{{ hechizo.pasos }}"</p>
+              <p class="spell-text italic">"{{ hechizo.ritual }}"</p>
             </div>
 
             <div *ngIf="categoriaSeleccionada?.hechizos.length === 0" class="empty-state">
