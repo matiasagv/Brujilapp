@@ -4,7 +4,7 @@
       <ion-back-button defaultHref="/home" color="warning"></ion-back-button>
     </ion-buttons>
     <ion-title style="font-family: 'Cinzel', serif; color: #d4af37; letter-spacing: 2px;">
-      TU GRIMORIO PERSONAL
+      TU GRIMORIO
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,13 +12,46 @@
 <ion-content [fullscreen]="true">
   <div class="main-container ion-padding">
 
+    <div class="mode-switcher">
+      <div class="switch-btn" [class.active]="modo === 'escribir'" (click)="cambiarModo('escribir')">
+        <ion-icon name="create-outline"></ion-icon> Escribir
+      </div>
+      <div class="switch-btn" [class.active]="modo === 'dibujar'" (click)="cambiarModo('dibujar')">
+        <ion-icon name="brush-outline"></ion-icon> Trazar
+      </div>
+    </div>
+
     <div class="parchment-container">
-      <ion-textarea 
+      
+      <ion-textarea *ngIf="modo === 'escribir'"
         placeholder="Escribe aquí tu hechizo, sueño o intención..." 
         [(ngModel)]="nuevoHechizo"
         rows="10"
         class="grimoire-textarea">
       </ion-textarea>
+
+      <div class="canvas-wrapper" [class.hidden]="modo !== 'dibujar'">
+        <canvas #canvas 
+          (touchstart)="startDrawing($event)" 
+          (touchmove)="moved($event)" 
+          (touchend)="endDrawing()"
+          (mousedown)="startDrawing($event)" 
+          (mousemove)="moved($event)" 
+          (mouseup)="endDrawing()">
+        </canvas>
+        
+        <div class="canvas-controls">
+          <ion-button fill="clear" size="small" (click)="deshacer()" [disabled]="history.length === 0">
+            <ion-icon name="arrow-undo-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+          
+          <ion-button fill="clear" size="small" (click)="limpiarLienzo()">
+            <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+
+      </div>
+
     </div>
 
     <ion-button expand="block" (click)="guardarEntrada()" class="magic-button">
@@ -30,7 +63,10 @@
       <h3 class="list-title">✦ Entradas Anteriores ✦</h3>
       
       <div *ngFor="let entrada of entradas" class="entry-paper">
-        <p class="entry-text">{{ entrada }}</p>
+        <p *ngIf="entrada.tipo === 'texto'" class="entry-text">{{ entrada.contenido }}</p>
+        <div *ngIf="entrada.tipo === 'imagen'" class="entry-image-container">
+          <img [src]="entrada.contenido" alt="Sigilo personal" />
+        </div>
         <div class="paper-divider"></div>
       </div>
     </div>

@@ -1,8 +1,6 @@
-// Importamos fuentes: Cinzel (Títulos), Lato (Cuerpo) y una cursiva para escribir
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@300;400&family=Satisfy&display=swap');
 
 ion-content {
-  // Mismo fondo místico del Home
   --background: radial-gradient(circle at 50% 10%, #2a0a38 0%, #0d0214 40%, #000000 100%);
   font-family: 'Lato', sans-serif;
 }
@@ -12,19 +10,48 @@ ion-content {
   padding-bottom: 40px;
 }
 
-// --- ÁREA DE ESCRITURA (PERGAMINO) ---
+// --- SELECTOR DE MODO ---
+.mode-switcher {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 15px;
+
+  .switch-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: #888;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+
+    &.active {
+      background: rgba(212, 175, 55, 0.2);
+      color: #d4af37;
+      border-color: #d4af37;
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+    }
+  }
+}
+
+// --- ÁREA DE PERGAMINO ---
 .parchment-container {
-  background: #f0e6d2; // Color hueso/pergamino antiguo
+  background: #f0e6d2; // Color pergamino
   border-radius: 8px;
-  padding: 5px; // Un borde interno
+  padding: 5px;
   box-shadow: 
-    inset 0 0 30px rgba(0,0,0,0.2), // Sombra interna para dar volumen
-    0 0 15px rgba(212, 175, 55, 0.3); // Resplandor dorado externo
-  border: 1px solid #d4af37; // Borde dorado fino
+    inset 0 0 30px rgba(0,0,0,0.2), 
+    0 0 15px rgba(212, 175, 55, 0.3);
+  border: 1px solid #d4af37;
   margin-bottom: 25px;
   position: relative;
+  min-height: 250px; // Altura mínima para poder dibujar a gusto
 
-  // Un detalle de "sello" o adorno en la esquina (opcional)
   &::after {
     content: '✦';
     position: absolute;
@@ -33,24 +60,62 @@ ion-content {
     color: #d4af37;
     font-size: 1.5rem;
     opacity: 0.5;
+    pointer-events: none;
   }
 }
 
+// Estilos del Textarea
 .grimoire-textarea {
-  --background: transparent; // Hacemos transparente el fondo del input de Ionic
+  --background: transparent;
   --padding-start: 15px;
   --padding-end: 15px;
   --padding-top: 15px;
   --padding-bottom: 15px;
-  --placeholder-color: #8b7d6b; // Color marrón para el placeholder
-  --color: #3e2723; // Color marrón oscuro para el texto escrito
-
-  font-family: 'Satisfy', cursive; // Fuente estilo escritura a mano
+  --placeholder-color: #8b7d6b;
+  --color: #3e2723;
+  font-family: 'Satisfy', cursive;
   font-size: 1.2rem;
   line-height: 1.6;
+  height: 100%;
+  min-height: 240px;
 }
 
-// --- BOTÓN MÁGICO (Igual que el del Home) ---
+// Estilos del Canvas (Dibujo)
+.canvas-wrapper {
+  width: 100%;
+  height: 250px;
+  position: relative;
+  
+  &.hidden {
+    display: none;
+  }
+
+  canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: crosshair;
+    touch-action: none; 
+  }
+
+  // Contenedor de botones flotantes
+  .canvas-controls {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    gap: 5px;
+    background: rgba(240, 230, 210, 0.6); // Fondo semitransparente para que se vean bien
+    border-radius: 20px;
+    padding: 2px;
+
+    ion-button {
+      --color: #5d4037; // Marrón oscuro
+      margin: 0;
+    }
+  }
+}
+// --- BOTÓN MÁGICO ---
 .magic-button {
   --background: linear-gradient(to right, #2e0e36, #4a148c);
   --border-radius: 4px;
@@ -59,7 +124,6 @@ ion-content {
   --border-style: solid;
   --box-shadow: 0 0 15px rgba(74, 20, 140, 0.5);
   --color: #d4af37;
-
   font-family: 'Cinzel', serif;
   font-weight: 700;
   letter-spacing: 1px;
@@ -79,12 +143,12 @@ ion-content {
 }
 
 .entry-paper {
-  background: #f0e6d2; // Color pergamino
+  background: #f0e6d2;
   padding: 15px 20px;
   margin-bottom: 15px;
   border-radius: 4px;
   box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
-  border-left: 3px solid #d4af37; // Borde dorado a la izquierda
+  border-left: 3px solid #d4af37;
   position: relative;
 
   .entry-text {
@@ -95,7 +159,21 @@ ion-content {
     line-height: 1.5;
   }
 
-  // Pequeña línea divisoria decorativa
+  // Estilo para cuando la entrada es una imagen
+  .entry-image-container {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    
+    img {
+      max-width: 100%;
+      height: auto;
+      // Efecto "tinta sobre papel": multiplicamos para que se fusione un poco
+      mix-blend-mode: multiply; 
+      opacity: 0.9;
+    }
+  }
+
   .paper-divider {
     height: 1px;
     background: rgba(139, 125, 107, 0.3);
