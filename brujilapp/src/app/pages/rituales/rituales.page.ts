@@ -12,63 +12,89 @@ import { IonicModule } from '@ionic/angular';
 })
 export class RitualesPage implements OnInit {
 
-  // LISTA DE RITUALES
+  // Variables para el Modal
+  isModalOpen: boolean = false;
+  categoriaSeleccionada: any = null;
+
+  // LISTA DE CATEGORÍAS (ICONOS)
   categorias = [
     {
-      nombre: 'Protección',
-      icono: 'shield-checkmark', // Icono de Ionic
-      color: 'warning', // Dorado
-      hechizos: [
-        {
-          titulo: 'Círculo de Sal',
-          materiales: 'Sal de mar gruesa, 1 vela blanca.',
-          pasos: 'Dibuja un círculo de sal alrededor de tu cama o altar. Enciende la vela en el centro y visualiza una luz blanca que repele cualquier energía densa. Di: "Solo la luz entra aquí".'
-        },
-        {
-          titulo: 'Amuleto de Turmalina',
-          materiales: 'Una piedra de turmalina negra, incienso de ruda.',
-          pasos: 'Pasa la piedra por el humo del incienso 7 veces. Llévala siempre en tu bolsillo izquierdo para repeler envidias.'
-        }
-      ]
-    },
-    {
-      nombre: 'Amor & Vínculos',
+      nombre: 'Amor',
       icono: 'heart',
       color: 'danger', // Rojo
       hechizos: [
-        {
-          titulo: 'Baño de Dulzura',
-          materiales: 'Miel, pétalos de rosa roja, canela en rama.',
-          pasos: 'Hierve los ingredientes en 2 litros de agua. Deja entibiar. Después de tu ducha normal, vierte esta mezcla desde el cuello hacia abajo pensando en atraer amor propio y externo.'
-        }
+        { titulo: 'Baño de Dulzura', materiales: 'Miel, canela, rosas rojas.', pasos: 'Hierve todo en 2L de agua. Úsalo tras tu ducha visualizando amor.' },
+        { titulo: 'Endulzamiento Suave', materiales: 'Azúcar, papel rosa, vela rosa.', pasos: 'Escribe el nombre, cúbrelo de azúcar y enciende la vela pidiendo armonía.' }
       ]
     },
     {
-      nombre: 'Dinero & Abundancia',
+      nombre: 'Protección',
+      icono: 'shield-checkmark',
+      color: 'medium', // Gris/Plata
+      hechizos: [
+        { titulo: 'Círculo de Sal', materiales: 'Sal gruesa.', pasos: 'Rodea tu cama o casa con sal visualizando una muralla de fuego azul.' },
+        { titulo: 'Escudo de Espejo', materiales: 'Visualización.', pasos: 'Imagina que un espejo te rodea mirando hacia afuera, rebotando todo mal.' }
+      ]
+    },
+    {
+      nombre: 'Dinero',
       icono: 'cash',
       color: 'success', // Verde
       hechizos: [
-        {
-          titulo: 'El Laurel en la Billetera',
-          materiales: '3 hojas de laurel secas, 1 billete de curso legal.',
-          pasos: 'Pon las hojas de laurel junto al billete en tu billetera. El laurel es símbolo de triunfo y el billete actúa como imán. Cámbialas cada luna nueva.'
-        },
-        {
-          titulo: 'Vela de Jueves',
-          materiales: 'Vela verde, aceite de oliva.',
-          pasos: 'Un jueves, unge la vela con aceite desde la base hacia la mecha. Enciéndela y pide apertura de caminos laborales.'
-        }
+        { titulo: 'Imán de Billetera', materiales: 'Laurel, billete, pirita.', pasos: 'Guarda una hoja de laurel y una pirita en tu billetera junto al dinero.' },
+        { titulo: 'Lluvia de Arroz', materiales: 'Arroz, monedas.', pasos: 'Pon un plato con arroz y 7 monedas en la entrada de tu casa o negocio.' }
       ]
     },
     {
-      nombre: 'Limpieza Energética',
+      nombre: 'Abundancia',
+      icono: 'infinite', // Icono de infinito
+      color: 'warning', // Dorado
+      hechizos: [
+        { titulo: 'Frasco de la Abundancia', materiales: 'Lentejas, maíz, arroz, monedas.', pasos: 'Llena un frasco por capas con las semillas y pon las monedas arriba. Déjalo en la cocina.' }
+      ]
+    },
+    {
+      nombre: 'Limpieza',
       icono: 'water',
       color: 'tertiary', // Azul
       hechizos: [
-        {
-          titulo: 'Sahumerio de Salvia',
-          materiales: 'Atado de salvia blanca o palo santo.',
-          pasos: 'Enciende el atado y recorre tu casa desde la habitación más lejana hasta la puerta de entrada, haciendo espirales con el humo en cada esquina.'
+        { titulo: 'Sahumerio de Ruda', materiales: 'Ruda seca, carbón.', pasos: 'Ahúma toda la casa desde el fondo hacia la puerta para sacar larvas astrales.' },
+        { titulo: 'Baño de Sal y Vinagre', materiales: 'Sal de mar, vinagre blanco.', pasos: 'Mezcla en agua y límpiate del cuello abajo para cortar la negatividad.' }
+      ]
+    },
+    {
+      nombre: 'Devoción',
+      icono: 'flame', 
+      color: 'warning', // Naranja/Dorado
+      hechizos: [
+        { titulo: 'Ofrenda a Hécate', materiales: 'Ajo, llaves, vino.', pasos: 'En una encrucijada o altar, deja las ofrendas en luna nueva pidiendo guía.' },
+        { titulo: 'Altar Diario', materiales: 'Vela blanca, vaso de agua.', pasos: 'Enciende la vela y cambia el agua cada día agradeciendo a tus guías.' }
+      ]
+    },
+    {
+      nombre: 'Volteo',
+      icono: 'refresh-circle', // Flechas girando
+      color: 'danger', // Rojo/Oscuro
+      hechizos: [
+        { titulo: 'Vela de Volteo', materiales: 'Vela negra/roja (reversibles), aceite.', pasos: 'Unge la vela de abajo hacia arriba pidiendo que todo mal vuelva a su origen.' },
+        { titulo: 'Espejo Enterrado', materiales: 'Espejo pequeño.', pasos: 'Entierra un espejo mirando hacia abajo en la entrada para que el mal rebote a la tierra.' }
+      ]
+    },
+    // NUEVA CATEGORÍA: DOMINIO (Para desespero y control)
+    {
+      nombre: 'Dominio',
+      icono: 'lock-closed', // Candado (Atadura)
+      color: 'dark', // Negro (Magia fuerte)
+      hechizos: [
+        { 
+          titulo: 'Vela del Desespero', 
+          materiales: 'Vela roja, alfiler, aceite de dominio.', 
+          pasos: 'Talla el nombre de la persona 7 veces en la vela. Úngela pensando en que te busca desesperadamente. Di: "No tendrás paz hasta que a mis pies vengas a parar".' 
+        },
+        { 
+          titulo: 'Ritual del Pie Izquierdo', 
+          materiales: 'Bolígrafo rojo.', 
+          pasos: 'Escribe el nombre de la persona en la planta de tu pie izquierdo. Zapatea 3 veces fuerte contra el suelo diciendo: "Te domino, te llamo y te traigo a mí ahora mismo".' 
         }
       ]
     }
@@ -77,6 +103,17 @@ export class RitualesPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  // ABRIR EL MODAL CON LOS HECHIZOS
+  abrirCategoria(cat: any) {
+    this.categoriaSeleccionada = cat;
+    this.isModalOpen = true;
+  }
+
+  cerrarModal() {
+    this.isModalOpen = false;
+    this.categoriaSeleccionada = null;
   }
 
 }

@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home" color="light"></ion-back-button>
     </ion-buttons>
-    <ion-title style="font-family: 'Cinzel', serif; color: #d4af37; font-size: 1rem;">
+    <ion-title style="font-family: 'Cinzel', serif; color: #d4af37; font-size: 1rem; letter-spacing: 2px;">
       GRIMORIO DE RITUALES
     </ion-title>
   </ion-toolbar>
@@ -12,35 +12,60 @@
 <ion-content [fullscreen]="true">
   <div class="main-container ion-padding">
     
-    <p class="intro-text">Selecciona una intención para revelar sus secretos.</p>
+    <p class="intro-text">✦ Elige tu intención mágica ✦</p>
 
-    <ion-accordion-group expand="inset" mode="ios">
+    <div class="ritual-grid">
       
-      <ion-accordion *ngFor="let cat of categorias" [value]="cat.nombre" class="magic-accordion">
-        
-        <ion-item slot="header" lines="none" class="accordion-header">
-          <ion-icon [name]="cat.icono" slot="start" [color]="cat.color"></ion-icon>
-          <ion-label style="font-family: 'Cinzel', serif;">{{ cat.nombre }}</ion-label>
-        </ion-item>
-
-        <div class="ion-padding" slot="content" style="background: rgba(0,0,0,0.4);">
-          
-          <div *ngFor="let hechizo of cat.hechizos" class="spell-card">
-            <h3 class="spell-title">✦ {{ hechizo.titulo }}</h3>
-            <p class="spell-materials">
-              <strong>Ingredientes:</strong> {{ hechizo.materiales }}
-            </p>
-            <p class="spell-steps">
-              {{ hechizo.pasos }}
-            </p>
-            <div class="spell-divider"></div>
-          </div>
-
+      <div class="ritual-item" *ngFor="let cat of categorias" (click)="abrirCategoria(cat)">
+        <div class="icon-circle" [ngClass]="cat.color">
+          <ion-icon [name]="cat.icono"></ion-icon>
         </div>
+        <span class="ritual-name">{{ cat.nombre }}</span>
+      </div>
 
-      </ion-accordion>
+    </div>
 
-    </ion-accordion-group>
+    <ion-modal [isOpen]="isModalOpen" (didDismiss)="cerrarModal()" class="ritual-modal">
+      <ng-template>
+        
+        <ion-header class="ion-no-border">
+          <ion-toolbar style="--background: #1a1a1a;">
+            <ion-title style="font-family: 'Cinzel', serif; color: #d4af37;">
+              {{ categoriaSeleccionada?.nombre }}
+            </ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="cerrarModal()" color="light">
+                <ion-icon name="close"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+
+        <ion-content class="modal-content">
+          <div class="spells-container ion-padding">
+            
+            <div *ngFor="let hechizo of categoriaSeleccionada?.hechizos" class="spell-card">
+              <div class="spell-header">
+                <ion-icon name="sparkles" class="spell-icon"></ion-icon>
+                <h3 class="spell-title">{{ hechizo.titulo }}</h3>
+              </div>
+              
+              <span class="section-label">Ingredientes:</span>
+              <p class="spell-text">{{ hechizo.materiales }}</p>
+
+              <span class="section-label">Ritual:</span>
+              <p class="spell-text italic">"{{ hechizo.pasos }}"</p>
+            </div>
+
+            <div *ngIf="categoriaSeleccionada?.hechizos.length === 0" class="empty-state">
+              <p>Aún no has escrito rituales para esto.</p>
+            </div>
+
+          </div>
+        </ion-content>
+
+      </ng-template>
+    </ion-modal>
 
   </div>
 </ion-content>
