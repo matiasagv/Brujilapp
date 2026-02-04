@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import { heart, shieldCheckmark, cash, infinite, water, flame, refreshCircle, lockClosed, sparkles, close } from 'ionicons/icons';
 
 @Component({
   selector: 'app-rituales',
@@ -12,100 +14,151 @@ import { IonicModule } from '@ionic/angular';
 })
 export class RitualesPage implements OnInit {
 
-  // Variables para el Modal
   isModalOpen: boolean = false;
   categoriaSeleccionada: any = null;
 
-  // LISTA DE CATEGORÍAS (ICONOS)
+  // LISTA ACTUALIZADA: ENFOQUE EN VELAS Y HIERBAS
   categorias = [
     {
       nombre: 'Amor',
       icono: 'heart',
-      color: 'danger', // Rojo
+      color: 'danger', 
       hechizos: [
-        { titulo: 'Baño de Dulzura', materiales: 'Miel, canela, rosas rojas.', pasos: 'Hierve todo en 2L de agua. Úsalo tras tu ducha visualizando amor.' },
-        { titulo: 'Endulzamiento Suave', materiales: 'Azúcar, papel rosa, vela rosa.', pasos: 'Escribe el nombre, cúbrelo de azúcar y enciende la vela pidiendo armonía.' }
+        { 
+          titulo: 'Vela de Miel y Lavanda (Armonía)', 
+          materiales: 'Vela rosa, miel, lavanda seca.', 
+          pasos: 'Unge la vela con miel y ruédala sobre la lavanda. Enciéndela un viernes pidiendo paz y amor dulce en tu hogar.' 
+        },
+        { 
+          titulo: 'Amarre Suave con Sigilo', 
+          materiales: 'Vela roja, clavo de olor, papel.', 
+          pasos: 'Dibuja un sigilo de unión en el papel. Ponlo bajo la vela roja. Clava 3 clavos de olor en la vela formando un triángulo y enciende.' 
+        }
       ]
     },
     {
       nombre: 'Protección',
       icono: 'shield-checkmark',
-      color: 'medium', // Gris/Plata
+      color: 'medium', 
       hechizos: [
-        { titulo: 'Círculo de Sal', materiales: 'Sal gruesa.', pasos: 'Rodea tu cama o casa con sal visualizando una muralla de fuego azul.' },
-        { titulo: 'Escudo de Espejo', materiales: 'Visualización.', pasos: 'Imagina que un espejo te rodea mirando hacia afuera, rebotando todo mal.' }
+        { 
+          titulo: 'Vela Muralla de Ajo', 
+          materiales: 'Vela blanca, ajo machacado, sal.', 
+          pasos: 'Machaca el ajo con sal. Viste la vela blanca con esta mezcla de abajo hacia arriba. Al encenderla, visualiza un escudo impenetrable.' 
+        },
+        { 
+          titulo: 'Sigilo de Romero', 
+          materiales: 'Ramitas de romero, hilo rojo.', 
+          pasos: 'Ata las ramas formando una cruz o sigilo de protección. Cuélgalo detrás de la puerta principal para que nada malo entre.' 
+        }
       ]
     },
     {
       nombre: 'Dinero',
       icono: 'cash',
-      color: 'success', // Verde
+      color: 'success', 
       hechizos: [
-        { titulo: 'Imán de Billetera', materiales: 'Laurel, billete, pirita.', pasos: 'Guarda una hoja de laurel y una pirita en tu billetera junto al dinero.' },
-        { titulo: 'Lluvia de Arroz', materiales: 'Arroz, monedas.', pasos: 'Pon un plato con arroz y 7 monedas en la entrada de tu casa o negocio.' }
+        { 
+          titulo: 'Vela Verde de Activación', 
+          materiales: 'Vela verde, clavo de olor, canela.', 
+          pasos: 'Talla el símbolo $ o la runa Fehu en la vela. Introduce 7 clavos de olor en la talla y espolvorea canela mientras arde.' 
+        },
+        { 
+          titulo: 'Sahumerio Abrecaminos', 
+          materiales: 'Carbón, romero seco, cáscara de naranja.', 
+          pasos: 'Quema el romero y la naranja sobre el carbón. Pasa el humo por tu billetera y negocio visualizando puertas abiertas.' 
+        }
       ]
     },
     {
       nombre: 'Abundancia',
-      icono: 'infinite', // Icono de infinito
-      color: 'warning', // Dorado
+      icono: 'infinite',
+      color: 'warning', 
       hechizos: [
-        { titulo: 'Frasco de la Abundancia', materiales: 'Lentejas, maíz, arroz, monedas.', pasos: 'Llena un frasco por capas con las semillas y pon las monedas arriba. Déjalo en la cocina.' }
+        { 
+          titulo: 'Lámpara de Aceite y Granos', 
+          materiales: 'Frasco, aceite, maíz, lentejas, mecha.', 
+          pasos: 'Prepara una lámpara casera con granos en el fondo y aceite. Enciéndela los jueves para que nunca falte el alimento.' 
+        }
       ]
     },
     {
       nombre: 'Limpieza',
       icono: 'water',
-      color: 'tertiary', // Azul
+      color: 'tertiary', 
       hechizos: [
-        { titulo: 'Sahumerio de Ruda', materiales: 'Ruda seca, carbón.', pasos: 'Ahúma toda la casa desde el fondo hacia la puerta para sacar larvas astrales.' },
-        { titulo: 'Baño de Sal y Vinagre', materiales: 'Sal de mar, vinagre blanco.', pasos: 'Mezcla en agua y límpiate del cuello abajo para cortar la negatividad.' }
+        { 
+          titulo: 'Vela Destrancadera', 
+          materiales: 'Vela morada, ruda, sal gruesa.', 
+          pasos: 'Pasa la vela por todo tu cuerpo sin tocar la piel. Luego úngela con aceite y pégale la ruda. Enciéndela para quemar lo denso.' 
+        },
+        { 
+          titulo: 'Sahumerio Fuerte (Ají)', 
+          materiales: 'Ají seco, carbón, ruda.', 
+          pasos: 'CUIDADO: El humo es picante. Quema el ají seco con ruda y recorre la casa con ventanas abiertas para expulsar larvas y parásitos.' 
+        }
       ]
     },
     {
       nombre: 'Devoción',
       icono: 'flame', 
-      color: 'warning', // Naranja/Dorado
+      color: 'warning', 
       hechizos: [
-        { titulo: 'Ofrenda a Hécate', materiales: 'Ajo, llaves, vino.', pasos: 'En una encrucijada o altar, deja las ofrendas en luna nueva pidiendo guía.' },
-        { titulo: 'Altar Diario', materiales: 'Vela blanca, vaso de agua.', pasos: 'Enciende la vela y cambia el agua cada día agradeciendo a tus guías.' }
+        { 
+          titulo: 'Luz a la Santa Muerte', 
+          materiales: 'Vela blanca, vaso de agua, cigarro/puro.', 
+          pasos: 'Ofrece la luz de la vela blanca agradeciendo su protección. Sopla humo de tabaco sobre su imagen y pídele que cubra tu espalda.' 
+        },
+        { 
+          titulo: 'Llamado a Hécate (Strophalos)', 
+          materiales: 'Vela negra, llave antigua, ajo.', 
+          pasos: 'Dibuja el sigilo Strophalos (rueda de Hécate) en un papel. Ponlo bajo la vela negra rodeada de dientes de ajo en una encrucijada o altar.' 
+        }
       ]
     },
     {
       nombre: 'Volteo',
-      icono: 'refresh-circle', // Flechas girando
-      color: 'danger', // Rojo/Oscuro
-      hechizos: [
-        { titulo: 'Vela de Volteo', materiales: 'Vela negra/roja (reversibles), aceite.', pasos: 'Unge la vela de abajo hacia arriba pidiendo que todo mal vuelva a su origen.' },
-        { titulo: 'Espejo Enterrado', materiales: 'Espejo pequeño.', pasos: 'Entierra un espejo mirando hacia abajo en la entrada para que el mal rebote a la tierra.' }
-      ]
-    },
-    // NUEVA CATEGORÍA: DOMINIO (Para desespero y control)
-    {
-      nombre: 'Dominio',
-      icono: 'lock-closed', // Candado (Atadura)
-      color: 'dark', // Negro (Magia fuerte)
+      icono: 'refresh-circle', 
+      color: 'dark', 
       hechizos: [
         { 
-          titulo: 'Vela del Desespero', 
-          materiales: 'Vela roja, alfiler, aceite de dominio.', 
-          pasos: 'Talla el nombre de la persona 7 veces en la vela. Úngela pensando en que te busca desesperadamente. Di: "No tendrás paz hasta que a mis pies vengas a parar".' 
+          titulo: 'Vela Reversible con Ají', 
+          materiales: 'Vela roja/negra (doble color), ají en polvo.', 
+          pasos: 'Corta la punta inferior de la vela para "darle la vuelta" a la mecha. Vístela con aceite y ají. Pide que todo daño vuelva a su origen x3.' 
         },
         { 
-          titulo: 'Ritual del Pie Izquierdo', 
-          materiales: 'Bolígrafo rojo.', 
-          pasos: 'Escribe el nombre de la persona en la planta de tu pie izquierdo. Zapatea 3 veces fuerte contra el suelo diciendo: "Te domino, te llamo y te traigo a mí ahora mismo".' 
+          titulo: 'Espejo de Retorno', 
+          materiales: 'Vela blanca, espejo pequeño.', 
+          pasos: 'Enciende la vela frente al espejo. Di: "Lo que me envías, en este espejo rebota y a ti regresa". Deja que se consuma.' 
+        }
+      ]
+    },
+    {
+      nombre: 'Dominio',
+      icono: 'lock-closed', 
+      color: 'dark', 
+      hechizos: [
+        { 
+          titulo: 'Vela Tapa Bocas', 
+          materiales: 'Vela negra, pimienta, hilo negro.', 
+          pasos: 'Escribe el nombre de quien habla mal de ti en la vela. Úngela con pimienta y átala con el hilo negro para silenciar chismes.' 
+        },
+        { 
+          titulo: 'Ritual del Clavo Ardiente', 
+          materiales: 'Vela roja, papel, 1 clavo de olor.', 
+          pasos: 'Escribe el nombre en papel. Envuélvelo alrededor del clavo de olor. Quémalo con la llama de la vela diciendo: "Tu voluntad es mía".' 
         }
       ]
     }
   ];
 
-  constructor() { }
+  constructor() { 
+    addIcons({ heart, shieldCheckmark, cash, infinite, water, flame, refreshCircle, lockClosed, sparkles, close });
+  }
 
   ngOnInit() {
   }
 
-  // ABRIR EL MODAL CON LOS HECHIZOS
   abrirCategoria(cat: any) {
     this.categoriaSeleccionada = cat;
     this.isModalOpen = true;

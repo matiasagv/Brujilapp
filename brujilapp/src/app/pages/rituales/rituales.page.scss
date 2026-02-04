@@ -1,12 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@300;400&display=swap');
 
+// --- 1. FONDO MORADO OSCURO ---
 ion-content {
   --background: radial-gradient(circle at 50% 10%, #2a0a38 0%, #0d0214 40%, #000000 100%);
   font-family: 'Lato', sans-serif;
 }
 
+// --- 2. CAPA DE ESTRELLAS (CORREGIDO) ---
+// Usamos una clase separada en lugar de modificar el ::part del content
+.stars-bg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
+    radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px);
+  background-size: 550px 550px, 350px 350px;
+  background-position: 0 0, 40px 60px;
+  opacity: 0.5;
+  z-index: 0; // Detrás del contenido
+}
+
+// ARREGLO DEL TÍTULO
+ion-header ion-title {
+  font-size: 0.95rem !important;
+  white-space: normal;
+  text-overflow: clip; 
+  line-height: 1.2;
+  text-align: center;
+}
+
 .main-container {
   min-height: 100%;
+  position: relative;
+  z-index: 1; // Para estar sobre las estrellas
 }
 
 .intro-text {
@@ -19,68 +46,128 @@ ion-content {
   opacity: 0.8;
 }
 
-// --- CUADRÍCULA DE ICONOS ---
+// --- CUADRÍCULA MÁGICA ---
 .ritual-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); // 2 columnas
-  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
   padding-bottom: 40px;
 }
 
 .ritual-item {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 15px;
-  padding: 20px 10px;
+  background: linear-gradient(145deg, rgba(30, 30, 30, 0.8), rgba(10, 10, 10, 0.9));
+  border-radius: 16px;
+  padding: 25px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: transform 0.2s, background 0.2s;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
   cursor: pointer;
 
-  &:active {
-    transform: scale(0.95);
-    background: rgba(255, 255, 255, 0.1);
-  }
+  // ANIMACIÓN DE ENTRADA
+  opacity: 0;
+  animation: appearFade 0.6s ease-out forwards;
 
-  // Círculo del icono
   .icon-circle {
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    margin-bottom: 12px;
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.8); 
+    transition: transform 0.3s;
 
     ion-icon {
-      font-size: 30px;
-      color: #fff;
+      font-size: 28px;
+      color: #888;
+      transition: all 0.3s;
     }
-
-    // Colores específicos según la categoría
-    &.danger ion-icon { color: #ef5350; text-shadow: 0 0 10px rgba(239, 83, 80, 0.6); }
-    &.warning ion-icon { color: #ffca28; text-shadow: 0 0 10px rgba(255, 202, 40, 0.6); }
-    &.success ion-icon { color: #66bb6a; text-shadow: 0 0 10px rgba(102, 187, 106, 0.6); }
-    &.tertiary ion-icon { color: #42a5f5; text-shadow: 0 0 10px rgba(66, 165, 245, 0.6); }
-    &.medium ion-icon { color: #bdbdbd; text-shadow: 0 0 10px rgba(189, 189, 189, 0.6); }
   }
 
   .ritual-name {
     font-family: 'Cinzel', serif;
-    color: #e0d1ff;
-    font-size: 0.9rem;
+    color: #ccc;
+    font-size: 0.85rem;
     font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s;
     text-align: center;
-    letter-spacing: 0.5px;
+  }
+
+  // --- COLORES ---
+  &.danger {
+    border-color: rgba(239, 83, 80, 0.3);
+    .icon-circle ion-icon { color: #ef5350; filter: drop-shadow(0 0 5px rgba(239, 83, 80, 0.8)); }
+    .ritual-name { color: #ffcdd2; }
+    &:active { box-shadow: 0 0 20px rgba(239, 83, 80, 0.3); border-color: #ef5350; }
+  }
+
+  &.success {
+    border-color: rgba(102, 187, 106, 0.3);
+    .icon-circle ion-icon { color: #66bb6a; filter: drop-shadow(0 0 5px rgba(102, 187, 106, 0.8)); }
+    .ritual-name { color: #c8e6c9; }
+    &:active { box-shadow: 0 0 20px rgba(102, 187, 106, 0.3); border-color: #66bb6a; }
+  }
+
+  &.warning {
+    border-color: rgba(255, 202, 40, 0.3);
+    .icon-circle ion-icon { color: #ffca28; filter: drop-shadow(0 0 5px rgba(255, 202, 40, 0.8)); }
+    .ritual-name { color: #ffecb3; }
+    &:active { box-shadow: 0 0 20px rgba(255, 202, 40, 0.3); border-color: #ffca28; }
+  }
+
+  &.tertiary {
+    border-color: rgba(66, 165, 245, 0.3);
+    .icon-circle ion-icon { color: #42a5f5; filter: drop-shadow(0 0 5px rgba(66, 165, 245, 0.8)); }
+    .ritual-name { color: #bbdefb; }
+    &:active { box-shadow: 0 0 20px rgba(66, 165, 245, 0.3); border-color: #42a5f5; }
+  }
+
+  &.medium {
+    border-color: rgba(224, 224, 224, 0.3);
+    .icon-circle ion-icon { color: #e0e0e0; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.6)); }
+    .ritual-name { color: #fff; }
+    &:active { box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); border-color: #fff; }
+  }
+
+  &.dark {
+    border-color: rgba(156, 39, 176, 0.4);
+    background: linear-gradient(145deg, #1a0525, #000);
+    .icon-circle ion-icon { color: #ab47bc; filter: drop-shadow(0 0 8px rgba(171, 71, 188, 0.9)); }
+    .ritual-name { color: #e1bee7; }
+    &:active { box-shadow: 0 0 20px rgba(156, 39, 176, 0.4); border-color: #ab47bc; }
+  }
+
+  &:active {
+    transform: scale(0.96);
   }
 }
 
-// --- ESTILOS DEL MODAL (VENTANA DE HECHIZOS) ---
+// RETRASOS ANIMACIÓN
+.ritual-item:nth-child(1) { animation-delay: 0.1s; }
+.ritual-item:nth-child(2) { animation-delay: 0.15s; }
+.ritual-item:nth-child(3) { animation-delay: 0.2s; }
+.ritual-item:nth-child(4) { animation-delay: 0.25s; }
+.ritual-item:nth-child(5) { animation-delay: 0.3s; }
+.ritual-item:nth-child(6) { animation-delay: 0.35s; }
+.ritual-item:nth-child(7) { animation-delay: 0.4s; }
+.ritual-item:nth-child(8) { animation-delay: 0.45s; }
+
+@keyframes appearFade {
+  from { opacity: 0; transform: translateY(20px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+// --- MODAL ---
 ion-modal.ritual-modal {
   --height: 80%;
   --border-radius: 20px;
@@ -92,7 +179,6 @@ ion-modal.ritual-modal {
   --background: #141414;
 }
 
-// --- TARJETA DE HECHIZO ---
 .spell-card {
   background: rgba(255, 255, 255, 0.05);
   border-left: 3px solid #d4af37;
@@ -113,7 +199,6 @@ ion-modal.ritual-modal {
       font-size: 1.2rem;
       margin-right: 10px;
     }
-
     .spell-title {
       font-family: 'Cinzel', serif;
       color: #fff;
@@ -139,11 +224,7 @@ ion-modal.ritual-modal {
     color: #ccc;
     line-height: 1.5;
     margin: 0 0 15px;
-    
-    &.italic {
-      color: #e0e0e0;
-      font-style: italic;
-    }
+    &.italic { color: #e0e0e0; font-style: italic; }
   }
 }
 

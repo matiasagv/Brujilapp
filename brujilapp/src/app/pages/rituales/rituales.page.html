@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar style="--background: transparent;">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home" color="light"></ion-back-button>
+      <ion-back-button defaultHref="/home" color="light" text="Atrás"></ion-back-button>
     </ion-buttons>
     <ion-title style="font-family: 'Cinzel', serif; color: #d4af37; font-size: 1rem; letter-spacing: 2px;">
       GRIMORIO DE RITUALES
@@ -10,16 +10,24 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  
+  <div class="stars-bg"></div>
+
   <div class="main-container ion-padding">
     
     <p class="intro-text">✦ Elige tu intención mágica ✦</p>
 
     <div class="ritual-grid">
       
-      <div class="ritual-item" *ngFor="let cat of categorias" (click)="abrirCategoria(cat)">
-        <div class="icon-circle" [ngClass]="cat.color">
+      <div class="ritual-item" 
+           *ngFor="let cat of categorias" 
+           (click)="abrirCategoria(cat)"
+           [ngClass]="cat.color">
+        
+        <div class="icon-circle">
           <ion-icon [name]="cat.icono"></ion-icon>
         </div>
+        
         <span class="ritual-name">{{ cat.nombre }}</span>
       </div>
 
