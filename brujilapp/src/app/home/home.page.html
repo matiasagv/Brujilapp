@@ -1,38 +1,50 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="dark">
-    <ion-title>Brujilapp 🔮</ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar color="transparent">
+    <ion-title class="ion-text-center" style="color: #ffcc00; font-weight: bold; font-size: 1.5em;">
+      Brujilapp 🔮
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  
-  <h2>Aprende</h2>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="6">
-        <ion-card routerLink="/temas" color="medium">
-          <ion-card-header>
-            <ion-card-title>Tarot</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>Arcanos y tiradas</ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6">
-        <ion-card button color="medium">
-          <ion-card-header>
-            <ion-card-title>Magia</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>Rituales y velas</ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-content [fullscreen]="true">
+  <div class="main-container ion-padding">
+    
+    <div>
+      <h2>Explora y Aprende</h2>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-md="6">
+            <ion-card routerLink="/temas">
+              <ion-card-header>
+                <ion-card-title>
+                  <ion-icon name="moon" slot="start" style="vertical-align: middle; margin-right: 8px;"></ion-icon>
+                  Tarot
+                </ion-card-title>
+              </ion-card-header>
+              <ion-card-content>Arcanos mayores, menores y diferentes tiradas.</ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col size="12" size-md="6">
+            <ion-card button>
+              <ion-card-header>
+                <ion-card-title>
+                  <ion-icon name="flame" slot="start" style="vertical-align: middle; margin-right: 8px;"></ion-icon>
+                  Magia y Rituales
+                </ion-card-title>
+              </ion-card-header>
+              <ion-card-content>Velas, hierbas, lunarios y hechizos básicos.</ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
 
-  <div class="ion-text-center ion-margin-top">
-    <ion-button routerLink="/libro-sombras" shape="round" color="tertiary" size="large">
-      <ion-icon name="book" slot="start"></ion-icon>
-      Acceso al Libro de Sombras
-    </ion-button>
+    <div class="bottom-button-container">
+      <ion-button routerLink="/libro-sombras" class="magic-button">
+        <ion-icon name="book" slot="start"></ion-icon>
+        Abrir Libro de Sombras
+      </ion-button>
+    </div>
+
   </div>
-
 </ion-content>

@@ -1,27 +1,76 @@
-#container {
+ion-content {
+  // Fondo de cielo estrellado (puedes cambiar la URL por otra imagen si prefieres)
+  --background: url('https://images.unsplash.com/photo-1536532184021-da421004aa68?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80') no-repeat center center / cover fixed;
+  
+  // Tipografía y colores generales
+  color: white;
+  font-family: 'Cinzel', serif; // Una fuente más mística (si la importas) o usa la por defecto
+}
+
+// Contenedor principal para usar Flexbox
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%; // Ocupa toda la altura disponible
+  padding-bottom: 20px; // Espacio inferior para el botón
+}
+
+// Título principal de la sección
+h2 {
   text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  color: #e0d1ff; // Un tono lila claro
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+// Estilo de las tarjetas
+ion-card {
+  background: rgba(40, 20, 60, 0.7); // Fondo morado oscuro translúcido
+  backdrop-filter: blur(10px); // Efecto de desenfoque en el fondo
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1); // Borde sutil
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); // Sombra suave
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px); // Efecto de elevación al pasar el mouse
+  }
+
+  ion-card-header {
+    padding-bottom: 5px;
+  }
+
+  ion-card-title {
+    color: #ffcc00; // Título dorado
+    font-size: 1.3em;
+    font-weight: bold;
+  }
+
+  ion-card-content {
+    color: #ddd; // Texto descriptivo claro
+    font-size: 1em;
+  }
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+// Contenedor del botón inferior
+.bottom-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: auto; // Empuja hacia abajo
+  padding: 20px;
 }
 
-#container a {
-  text-decoration: none;
+// Estilo del botón principal
+.magic-button {
+  --background: linear-gradient(45deg, #6a11cb, #2575fc); // Gradiente morado-azul
+  --border-radius: 30px;
+  --box-shadow: 0 4px 15px rgba(106, 17, 203, 0.4); // Sombra brillante
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 1.1em;
+  height: 55px;
+  width: 90%; // Ancho casi total
+  max-width: 400px; // Ancho máximo en pantallas grandes
 }
