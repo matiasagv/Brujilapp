@@ -1,13 +1,22 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>libro-sombras</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
+  <h3>Tu Libro de Sombras 🌑</h3>
+  
+  <ion-textarea 
+    label="Escribe tu hechizo o pensamiento..." 
+    labelPlacement="floating" 
+    fill="outline" 
+    [(ngModel)]="nuevoHechizo"
+    rows="6">
+  </ion-textarea>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">libro-sombras</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-button expand="block" (click)="guardarEntrada()" class="ion-margin-top">
+    Guardar en el Libro
+  </ion-button>
+
+  <ion-list>
+    <ion-list-header>Entradas Anteriores</ion-list-header>
+    <ion-item *ngFor="let entrada of entradas">
+      <ion-label class="ion-text-wrap">{{ entrada }}</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
