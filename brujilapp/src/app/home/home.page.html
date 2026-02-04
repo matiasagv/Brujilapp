@@ -3,9 +3,11 @@
     
     <div class="hero-section ion-padding-top">
       <div class="moon-container">
-        <div class="moon" [title]="nombreFase"></div> 
+        <img [src]="imagenFase" alt="Fase Lunar Actual" class="real-moon-image">
+        
         <div class="moon-glow"></div>
       </div>
+
       <h1 class="app-title">Brujilapp</h1>
       
       <p class="subtitle">
@@ -15,7 +17,6 @@
     </div>
 
     <div class="cards-container ion-padding">
-      
       <ion-card routerLink="/temas" class="mystic-card tarot-card">
         <div class="card-bg"></div>
         <ion-card-header>
@@ -37,7 +38,6 @@
           <ion-card-subtitle>Prácticas y Conexión</ion-card-subtitle>
         </ion-card-header>
       </ion-card>
-
     </div>
 
     <div class="bottom-section">

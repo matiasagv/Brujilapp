@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -8,52 +9,68 @@ import { RouterLink } from '@angular/router';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, RouterLink], 
+  imports: [IonicModule, CommonModule, FormsModule, RouterLink],
 })
 export class HomePage implements OnInit {
-  nombreFase: string = 'Cargando luna...'; // Texto por defecto
+
+  nombreFase: string = 'Cargando...';
+  // Imagen por defecto (mientras calcula)
+  imagenFase: string = 'assets/moon/lunallena-removebg.png';
 
   constructor() {}
 
   ngOnInit() {
-    // ESTO FALTABA: ¡Hay que llamar a la función al iniciar!
     this.calcularFaseLunar();
   }
 
   calcularFaseLunar() {
-    const fecha = new Date();
+    const date = new Date();
     
-    // OJO: getMonth() devuelve 0-11, sumamos 1 para el cálculo matemático
-    let year = fecha.getFullYear();
-    let month = fecha.getMonth() + 1; 
-    let day = fecha.getDate();
+    // Algoritmo simple para calcular la fase (0.0 a 1.0)
+    // 0 = Nueva, 0.5 = Llena, 1.0 = Nueva otra vez
+    const synodic = 29.53058867; // Días del ciclo lunar
+    const msPerDay = 86400000;
+    const baseDate = new Date('2000-01-06T18:14:00Z'); // Una luna nueva conocida
+    
+    const diff = date.getTime() - baseDate.getTime();
+    const phaseRatio = (diff / msPerDay) / synodic;
+    let phase = phaseRatio - Math.floor(phaseRatio); // Nos quedamos solo con el decimal (0.0 - 0.99)
 
-    // Ajuste del algoritmo para enero y febrero
-    if (month < 3) {
-      year--;
-      month += 12;
+    // ASIGNACIÓN DE TUS IMÁGENES SEGÚN LA FASE
+    // Usando la ruta: assets/moon/NOMBRE_DEL_ARCHIVO
+
+    if (phase < 0.03 || phase > 0.97) {
+      this.nombreFase = 'Luna Nueva';
+      this.imagenFase = 'assets/moon/lunanueva-removebg.png';
+    } 
+    else if (phase < 0.23) {
+      this.nombreFase = 'Creciente';
+      this.imagenFase = 'assets/moon/lunacreciente-removebg.png';
+    } 
+    else if (phase < 0.27) { // Cuarto Creciente (aprox 0.25)
+      this.nombreFase = 'Cuarto Creciente';
+      this.imagenFase = 'assets/moon/primercuartodeluna-removebg.png';
+    } 
+    else if (phase < 0.47) {
+      this.nombreFase = 'Gibosa Creciente';
+      this.imagenFase = 'assets/moon/lunagibosacreciente-removebg.png';
+    } 
+    else if (phase < 0.53) { // Luna Llena (aprox 0.50)
+      this.nombreFase = 'Luna Llena';
+      this.imagenFase = 'assets/moon/lunallena-removebg.png';
+    } 
+    else if (phase < 0.73) {
+      this.nombreFase = 'Gibosa Menguante';
+      this.imagenFase = 'assets/moon/lunagibosamenguante-removebg.png';
+    } 
+    else if (phase < 0.77) { // Cuarto Menguante (aprox 0.75)
+      this.nombreFase = 'Cuarto Menguante';
+      this.imagenFase = 'assets/moon/medialunamenguante-removebg.png';
+    } 
+    else {
+      this.nombreFase = 'Menguante';
+      this.imagenFase = 'assets/moon/mediocuartoluna-removebg.png'; 
+      // Asumí que 'mediocuartoluna' es tu imagen para la menguante final
     }
-
-    let a = Math.floor(year / 100);
-    let b = 2 - a + Math.floor(a / 4);
-    let jd = Math.floor(365.25 * (year + 4716)) + Math.floor(30.6001 * (month + 1)) + day + b - 1524.5;
-    let daysSinceNew = jd - 2451550.1;
-    let newMoons = daysSinceNew / 29.53058867;
-    let cycle = (newMoons - Math.floor(newMoons)) * 29.53;
-
-    // cycle es la "edad" de la luna en días
-    this.determinarNombreFase(cycle);
-  }
-
-  determinarNombreFase(edad: number) {
-    if (edad < 1.84) this.nombreFase = 'Luna Nueva';
-    else if (edad < 5.53) this.nombreFase = 'Luna Creciente';
-    else if (edad < 9.22) this.nombreFase = 'Cuarto Creciente';
-    else if (edad < 12.91) this.nombreFase = 'Gibosa Creciente';
-    else if (edad < 16.61) this.nombreFase = 'Luna Llena';
-    else if (edad < 20.30) this.nombreFase = 'Gibosa Menguante';
-    else if (edad < 23.99) this.nombreFase = 'Cuarto Menguante';
-    else if (edad < 27.68) this.nombreFase = 'Luna Menguante';
-    else this.nombreFase = 'Luna Nueva';
   }
 }
