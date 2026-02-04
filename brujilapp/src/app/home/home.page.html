@@ -1,49 +1,57 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar style="--background: transparent;">
-    <ion-title class="ion-text-center" style="font-family: 'Cinzel', serif; color: #9c27b0; letter-spacing: 3px; font-size: 0.9em; opacity: 0.8;">
-      BRUJILAPP
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <div class="main-container ion-padding">
+  <div class="main-container">
     
-    <div>
-      <h2>El Sendero</h2> <ion-grid>
-        <ion-row>
-          <ion-col size="12">
-            <ion-card routerLink="/temas">
-              <ion-card-header>
-                <ion-card-title>
-                  <ion-icon name="moon" slot="start" style="margin-right: 15px;"></ion-icon>
-                  Oráculo & Tarot
-                </ion-card-title>
-              </ion-card-header>
-              <ion-card-content>Descubre los secretos ocultos en los arcanos.</ion-card-content>
-            </ion-card>
-          </ion-col>
-
-          <ion-col size="12">
-            <ion-card button>
-              <ion-card-header>
-                <ion-card-title>
-                  <ion-icon name="key" slot="start" style="margin-right: 15px;"></ion-icon>
-                  Rituales & Altares
-                </ion-card-title>
-              </ion-card-header>
-              <ion-card-content>Ofrendas, llaves y caminos a la transmutación.</ion-card-content>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+   <div class="hero-section ion-padding-top">
+      <div class="moon-container">
+        <div class="moon" [title]="nombreFase"></div> 
+        <div class="moon-glow"></div>
+      </div>
+      <h1 class="app-title">Brujilapp</h1>
+      
+      <p class="subtitle">
+        Hoy la energía es de: <br>
+        <strong style="color: #d4af37; text-transform: uppercase;">{{ nombreFase }}</strong>
+      </p>
     </div>
 
-    <div class="bottom-button-container">
-      <ion-button routerLink="/libro-sombras" class="magic-button">
-        <ion-icon name="journal" slot="start" style="color: #d4af37;"></ion-icon>
-        Grimorio Personal
-      </ion-button>
+   <div class="cards-container ion-padding">
+      
+      <ion-card routerLink="/temas" class="mystic-card tarot-card">
+        <div class="card-bg"></div>
+        <ion-card-header>
+          <div class="icon-box">
+            <img src="assets/tarotlog-removebg.png" alt="Tarot">
+          </div>
+          <ion-card-title>Oráculo & Tarot</ion-card-title>
+          <ion-card-subtitle>Lectura de Arcanos</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+
+      <ion-card button class="mystic-card ritual-card">
+        <div class="card-bg"></div>
+        <ion-card-header>
+          <div class="icon-box purple">
+            <img src="assets/altarlog-removebg.png" alt="Altares">
+          </div>
+          <ion-card-title>Altares & Ritos</ion-card-title>
+          <ion-card-subtitle>Prácticas y Conexión</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+
+    </div>
+
+    <div class="bottom-section">
+      <div class="grimoire-container" routerLink="/libro-sombras">
+        <div class="grimoire-border"></div>
+        <ion-button fill="clear" class="grimoire-btn">
+          <ion-icon name="journal" slot="start"></ion-icon>
+          Abrir Grimorio Personal
+        </ion-button>
+      </div>
+
+      <div class="coven-signature">
+        <p>✦ UMBRAE SACRAE ✦</p>
+      </div>
     </div>
 
   </div>
