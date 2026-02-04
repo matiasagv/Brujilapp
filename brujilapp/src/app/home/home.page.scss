@@ -1,56 +1,67 @@
+// Importamos la fuente Cinzel para dar ese toque antiguo/romano (Hécate)
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+
 ion-content {
-  // Fondo de cielo estrellado (puedes cambiar la URL por otra imagen si prefieres)
-  --background: url('https://images.unsplash.com/photo-1536532184021-da421004aa68?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80') no-repeat center center / cover fixed;
+  // Fondo: Un degradado profundo desde púrpura casi negro hasta negro absoluto (el abismo)
+  --background: radial-gradient(circle at center, #2e0e36 0%, #000000 100%);
   
-  // Tipografía y colores generales
-  color: white;
-  font-family: 'Cinzel', serif; // Una fuente más mística (si la importas) o usa la por defecto
+  font-family: 'Cinzel', serif;
+  color: #f0e6d2; // Color "Hueso" o Pergamino suave, menos agresivo que el blanco puro
 }
 
-// Contenedor principal para usar Flexbox
 .main-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 100%; // Ocupa toda la altura disponible
-  padding-bottom: 20px; // Espacio inferior para el botón
+  min-height: 100%;
+  padding-bottom: 30px;
 }
 
-// Título principal de la sección
+// Título Principal
 h2 {
   text-align: center;
-  font-size: 2em;
+  font-size: 1.8em;
   margin-bottom: 20px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  color: #e0d1ff; // Un tono lila claro
+  letter-spacing: 2px;
+  color: #d4af37; // Dorado Antiguo (Símbolo de ofrenda y realeza)
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); // Resplandor dorado tenue
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  padding-bottom: 10px;
+  display: inline-block;
+  width: 100%;
 }
 
-// Estilo de las tarjetas
+// Estilo de las Cartas (Altares digitales)
 ion-card {
-  background: rgba(40, 20, 60, 0.7); // Fondo morado oscuro translúcido
-  backdrop-filter: blur(10px); // Efecto de desenfoque en el fondo
-  border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.1); // Borde sutil
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); // Sombra suave
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px); // Efecto de elevación al pasar el mouse
-  }
+  background: rgba(15, 15, 15, 0.85); // Casi negro, muy opaco
+  border: 1px solid #4a148c; // Borde Púrpura Imperial
+  border-radius: 4px; // Bordes más rectos, más serio/elegante
+  box-shadow: 0 0 15px rgba(74, 20, 140, 0.2); // Resplandor púrpura místico en vez de sombra negra
+  margin-bottom: 20px;
 
   ion-card-header {
-    padding-bottom: 5px;
+    padding-bottom: 0;
   }
 
   ion-card-title {
-    color: #ffcc00; // Título dorado
-    font-size: 1.3em;
-    font-weight: bold;
+    color: #e0d1ff; // Lila pálido fantasmal
+    font-size: 1.4em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    
+    ion-icon {
+      color: #9c27b0; // Iconos en púrpura vibrante
+    }
   }
 
   ion-card-content {
-    color: #ddd; // Texto descriptivo claro
-    font-size: 1em;
+    color: #a8a8a8; // Gris ceniza para el texto descriptivo
+    font-family: sans-serif; // Fuente simple para lectura fácil, contraste con el título
+    font-size: 0.95em;
+    margin-top: 5px;
   }
 }
 
@@ -58,19 +69,27 @@ ion-card {
 .bottom-button-container {
   display: flex;
   justify-content: center;
-  margin-top: auto; // Empuja hacia abajo
-  padding: 20px;
+  margin-top: auto;
+  padding: 0 20px;
 }
 
-// Estilo del botón principal
+// Botón "Libro de Sombras" (El foco principal)
 .magic-button {
-  --background: linear-gradient(45deg, #6a11cb, #2575fc); // Gradiente morado-azul
-  --border-radius: 30px;
-  --box-shadow: 0 4px 15px rgba(106, 17, 203, 0.4); // Sombra brillante
-  font-weight: bold;
-  letter-spacing: 1px;
+  // Gradiente oscuro: Negro a Púrpura Profundo
+  --background: linear-gradient(to right, #1a1a1a, #4a148c);
+  --border-radius: 2px; // Elegancia estricta
+  --border-color: #d4af37;
+  --border-width: 1px;
+  --border-style: solid;
+  --box-shadow: 0 0 20px rgba(74, 20, 140, 0.4); // Resplandor fuerte
+  
+  height: 60px;
+  width: 100%;
+  max-width: 500px;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
   font-size: 1.1em;
-  height: 55px;
-  width: 90%; // Ancho casi total
-  max-width: 400px; // Ancho máximo en pantallas grandes
+  letter-spacing: 2px;
+  color: #d4af37; // Texto dorado
+  margin-top: 20px;
 }

@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="transparent">
-    <ion-title class="ion-text-center" style="color: #ffcc00; font-weight: bold; font-size: 1.5em;">
-      Brujilapp 🔮
+  <ion-toolbar style="--background: transparent;">
+    <ion-title class="ion-text-center" style="font-family: 'Cinzel', serif; color: #9c27b0; letter-spacing: 3px; font-size: 0.9em; opacity: 0.8;">
+      BRUJILAPP
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,29 +10,29 @@
   <div class="main-container ion-padding">
     
     <div>
-      <h2>Explora y Aprende</h2>
-      <ion-grid>
+      <h2>El Sendero</h2> <ion-grid>
         <ion-row>
-          <ion-col size="12" size-md="6">
+          <ion-col size="12">
             <ion-card routerLink="/temas">
               <ion-card-header>
                 <ion-card-title>
-                  <ion-icon name="moon" slot="start" style="vertical-align: middle; margin-right: 8px;"></ion-icon>
-                  Tarot
+                  <ion-icon name="moon" slot="start" style="margin-right: 15px;"></ion-icon>
+                  Oráculo & Tarot
                 </ion-card-title>
               </ion-card-header>
-              <ion-card-content>Arcanos mayores, menores y diferentes tiradas.</ion-card-content>
+              <ion-card-content>Descubre los secretos ocultos en los arcanos.</ion-card-content>
             </ion-card>
           </ion-col>
-          <ion-col size="12" size-md="6">
+
+          <ion-col size="12">
             <ion-card button>
               <ion-card-header>
                 <ion-card-title>
-                  <ion-icon name="flame" slot="start" style="vertical-align: middle; margin-right: 8px;"></ion-icon>
-                  Magia y Rituales
+                  <ion-icon name="key" slot="start" style="margin-right: 15px;"></ion-icon>
+                  Rituales & Altares
                 </ion-card-title>
               </ion-card-header>
-              <ion-card-content>Velas, hierbas, lunarios y hechizos básicos.</ion-card-content>
+              <ion-card-content>Ofrendas, llaves y caminos a la transmutación.</ion-card-content>
             </ion-card>
           </ion-col>
         </ion-row>
@@ -41,8 +41,8 @@
 
     <div class="bottom-button-container">
       <ion-button routerLink="/libro-sombras" class="magic-button">
-        <ion-icon name="book" slot="start"></ion-icon>
-        Abrir Libro de Sombras
+        <ion-icon name="journal" slot="start" style="color: #d4af37;"></ion-icon>
+        Grimorio Personal
       </ion-button>
     </div>
 
