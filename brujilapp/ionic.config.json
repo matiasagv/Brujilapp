@@ -1,0 +1,7 @@
+{
+  "name": "brujilapp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
