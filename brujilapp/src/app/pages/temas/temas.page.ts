@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterLink } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { close, albums, grid, heart, helpCircle, arrowUpCircle, arrowDownCircle } from 'ionicons/icons';
+// Agregamos nuevos iconos para las nuevas tiradas: star, body, planet, calendar, walk
+import { close, albums, grid, heart, helpCircle, arrowUpCircle, arrowDownCircle, star, body, planet, calendar, walk } from 'ionicons/icons';
 
 @Component({
   selector: 'app-temas',
@@ -22,7 +23,7 @@ export class TemasPage implements OnInit {
   cartaSeleccionada: any = null;
   tiradaSeleccionada: any = null;
 
-  // --- ARCANOS MAYORES (22 Cartas) ---
+  // --- ARCANOS MAYORES ---
   arcanosMayores = [
     { numero: '0', romano: '0', nombre: 'El Loco', palabra: 'Inicios • Fe', historia: 'El alma antes de encarnar, llena de inocencia y potencial ilimitado, dando un salto de fe.', derecho: 'Nuevos comienzos, espontaneidad, fe ciega.', reves: 'Imprudencia, riesgos innecesarios.' },
     { numero: '1', romano: 'I', nombre: 'El Mago', palabra: 'Poder • Acción', historia: 'Canaliza la energía del cielo a la tierra con todas las herramientas a su disposición.', derecho: 'Manifestación, fuerza de voluntad, habilidad.', reves: 'Manipulación, talentos ocultos.' },
@@ -48,7 +49,7 @@ export class TemasPage implements OnInit {
     { numero: '21', romano: 'XXI', nombre: 'El Mundo', palabra: 'Completitud', historia: 'El fin del viaje, la integración total y el logro.', derecho: 'Completitud, logro, viajes.', reves: 'Falta de cierre, atajos.' },
   ];
 
-  // --- ARCANOS MENORES (56 Cartas Completas) ---
+  // --- ARCANOS MENORES ---
   arcanosMenores = [
     // BASTOS (Fuego)
     { palo: 'Bastos', nombre: 'As de Bastos', palabra: 'Inspiración', historia: 'La chispa inicial de la creatividad.', derecho: 'Nuevo proyecto, pasión.', reves: 'Falta de energía.' },
@@ -115,7 +116,7 @@ export class TemasPage implements OnInit {
     { palo: 'Oros', nombre: 'Rey de Oros', palabra: 'Éxito', historia: 'La cima del éxito material.', derecho: 'Riqueza, negocios.', reves: 'Codicia, corrupción.' },
   ];
 
-  // --- LISTA DE TIRADAS ---
+  // --- LISTA DE TIRADAS (AHORA MÁS COMPLETA) ---
   listaTiradas = [
     {
       nombre: 'Tres Cartas',
@@ -132,7 +133,7 @@ export class TemasPage implements OnInit {
       nombre: 'La Cruz Celta',
       subtitulo: 'Análisis Profundo',
       icono: 'grid',
-      descripcion: 'Una de las tiradas más antiguas y completas. Cubre todos los aspectos de una situación.',
+      descripcion: 'Una de las tiradas más antiguas y completas. Cubre todos los aspectos de una situación, internas y externas.',
       posiciones: [
         { num: 1, sig: 'Situación Presente', det: 'El corazón del asunto.' },
         { num: 2, sig: 'El Desafío', det: 'Lo que cruza o bloquea la situación.' },
@@ -150,7 +151,7 @@ export class TemasPage implements OnInit {
       nombre: 'Tirada del Amor',
       subtitulo: 'Dinámica de Pareja',
       icono: 'heart',
-      descripcion: 'Diseñada para entender la conexión entre dos personas.',
+      descripcion: 'Diseñada para entender la conexión entre dos personas y el futuro de la relación.',
       posiciones: [
         { num: 1, sig: 'Tú', det: 'Lo que aportas a la relación y cómo te sientes.' },
         { num: 2, sig: 'La otra persona', det: 'Sus sentimientos y actitud hacia ti.' },
@@ -166,11 +167,90 @@ export class TemasPage implements OnInit {
       posiciones: [
         { num: 'X', sig: 'Interpretación', det: 'Si salen más cartas al derecho, es un SÍ. Si salen más invertidas, es un NO. Los Arcanos Mayores tienen más peso.' }
       ]
+    },
+    // --- NUEVAS TIRADAS AGREGADAS ---
+    {
+      nombre: 'La Herradura',
+      subtitulo: 'Evolución de Situación',
+      icono: 'star',
+      descripcion: 'Ideal para ver cómo se desarrollará un evento específico paso a paso.',
+      posiciones: [
+        { num: 1, sig: 'El Pasado', det: 'Influencias pasadas que afectan el presente.' },
+        { num: 2, sig: 'El Presente', det: 'La situación actual.' },
+        { num: 3, sig: 'Futuro Inmediato', det: 'Lo que está por suceder pronto.' },
+        { num: 4, sig: 'La Actitud', det: 'Tu actitud frente al problema.' },
+        { num: 5, sig: 'El Entorno', det: 'Influencias de amigos, familia o trabajo.' },
+        { num: 6, sig: 'Obstáculos', det: 'Dificultades que debes superar.' },
+        { num: 7, sig: 'Resultado Final', det: 'El desenlace probable.' }
+      ]
+    },
+    {
+      nombre: 'Los Chakras',
+      subtitulo: 'Energía y Salud',
+      icono: 'body',
+      descripcion: 'Analiza tu estado energético y emocional a través de los 7 centros de poder.',
+      posiciones: [
+        { num: 1, sig: 'Raíz', det: 'Supervivencia, dinero, hogar, estabilidad.' },
+        { num: 2, sig: 'Sacro', det: 'Creatividad, sexualidad, emociones.' },
+        { num: 3, sig: 'Plexo Solar', det: 'Poder personal, voluntad, autoestima.' },
+        { num: 4, sig: 'Corazón', det: 'Amor, compasión, sanación.' },
+        { num: 5, sig: 'Garganta', det: 'Comunicación, verdad, expresión.' },
+        { num: 6, sig: 'Tercer Ojo', det: 'Intuición, visión, claridad mental.' },
+        { num: 7, sig: 'Corona', det: 'Conexión espiritual, sabiduría divina.' }
+      ]
+    },
+    {
+      nombre: 'Rueda Astrológica',
+      subtitulo: 'Panorama Completo',
+      icono: 'planet',
+      descripcion: 'Una tirada muy completa de 12 cartas, una por cada casa zodiacal, para ver todos los aspectos de la vida.',
+      posiciones: [
+        { num: 1, sig: 'Casa I (Yo)', det: 'Personalidad, estado actual.' },
+        { num: 2, sig: 'Casa II (Dinero)', det: 'Recursos, posesiones, valores.' },
+        { num: 3, sig: 'Casa III (Mente)', det: 'Comunicación, hermanos, viajes cortos.' },
+        { num: 4, sig: 'Casa IV (Hogar)', det: 'Familia, raíces, vida privada.' },
+        { num: 5, sig: 'Casa V (Placer)', det: 'Creatividad, romance, hijos.' },
+        { num: 6, sig: 'Casa VI (Salud)', det: 'Trabajo diario, rutinas, salud física.' },
+        { num: 7, sig: 'Casa VII (Pareja)', det: 'Matrimonio, socios, enemigos declarados.' },
+        { num: 8, sig: 'Casa VIII (Transformación)', det: 'Muerte, sexo, dinero de otros.' },
+        { num: 9, sig: 'Casa IX (Filosofía)', det: 'Viajes largos, estudios superiores, espiritualidad.' },
+        { num: 10, sig: 'Casa X (Carrera)', det: 'Éxito público, reputación, metas.' },
+        { num: 11, sig: 'Casa XI (Amigos)', det: 'Grupos, esperanzas, deseos.' },
+        { num: 12, sig: 'Casa XII (Inconsciente)', det: 'Secretos, karma, autoboicot.' }
+      ]
+    },
+    {
+      nombre: 'Tirada Semanal',
+      subtitulo: 'Día a Día',
+      icono: 'calendar',
+      descripcion: 'Saca una carta para la energía general de cada día de la semana.',
+      posiciones: [
+        { num: 1, sig: 'Lunes', det: 'Energía para iniciar la semana.' },
+        { num: 2, sig: 'Martes', det: 'Día de acción y conflicto.' },
+        { num: 3, sig: 'Miércoles', det: 'Comunicación y mente.' },
+        { num: 4, sig: 'Jueves', det: 'Expansión y suerte.' },
+        { num: 5, sig: 'Viernes', det: 'Amor y placer.' },
+        { num: 6, sig: 'Sábado', det: 'Responsabilidad y límites.' },
+        { num: 7, sig: 'Domingo', det: 'Descanso y espíritu.' }
+      ]
+    },
+    {
+      nombre: 'El Camino',
+      subtitulo: 'Rompiendo Muros',
+      icono: 'walk',
+      descripcion: 'Cuando te sientes bloqueado, esta tirada te muestra cómo avanzar.',
+      posiciones: [
+        { num: 1, sig: 'Tu Situación', det: 'Dónde estás ahora.' },
+        { num: 2, sig: 'El Muro', det: 'Qué te está bloqueando realmente.' },
+        { num: 3, sig: 'La Ayuda', det: 'Qué recurso o actitud te ayudará a cruzar.' },
+        { num: 4, sig: 'La Meta', det: 'Qué encontrarás al otro lado.' }
+      ]
     }
   ];
 
   constructor() { 
-    addIcons({ close, albums, grid, heart, helpCircle, arrowUpCircle, arrowDownCircle });
+    // Aseguramos que todos los iconos nuevos estén registrados
+    addIcons({ close, albums, grid, heart, helpCircle, arrowUpCircle, arrowDownCircle, star, body, planet, calendar, walk });
   }
 
   ngOnInit() {}
