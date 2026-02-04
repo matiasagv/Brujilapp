@@ -1,29 +1,35 @@
 <ion-header class="ion-no-border">
   <ion-toolbar style="--background: transparent;">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home" color="light"></ion-back-button>
+      <ion-back-button defaultHref="/home" color="warning" text="Atrás"></ion-back-button>
     </ion-buttons>
-    <ion-title style="font-family: 'Cinzel', serif; color: #e0d1ff; font-size: 0.9rem;">
+    <ion-title style="font-family: 'Cinzel', serif; color: #d4af37; letter-spacing: 2px;">
       BIBLIOTECA TAROT
     </ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar style="--background: transparent;">
+    <div class="magic-segment-container">
+      <ion-segment [value]="segmentoActual" (ionChange)="cambiarSegmento($event)" mode="ios" class="magic-segment">
+        <ion-segment-button value="mayores">
+          <ion-label>Mayores</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="menores">
+          <ion-label>Menores</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="tiradas">
+          <ion-label>Tiradas</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <div class="main-container ion-padding">
 
-    <ion-segment (ionChange)="cambiarSegmento($event)" [value]="segmentoActual" mode="ios" class="magic-segment">
-      <ion-segment-button value="mayores">
-        <ion-label>Arcanos Mayores</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="menores">
-        <ion-label>Arcanos Menores</ion-label>
-      </ion-segment-button>
-    </ion-segment>
-
-    <div class="cards-grid">
-      
-      <ng-container *ngIf="segmentoActual === 'mayores'">
+    <div *ngIf="segmentoActual === 'mayores'" class="animate-fade">
+      <div class="cards-grid">
         <div class="tarot-card-text" *ngFor="let carta of arcanosMayores" (click)="abrirDetalle(carta)">
           <div class="card-header">
             <span class="roman-num">{{ carta.romano }}</span>
@@ -34,9 +40,11 @@
             <p class="card-keyword">{{ carta.palabra }}</p>
           </div>
         </div>
-      </ng-container>
+      </div>
+    </div>
 
-      <ng-container *ngIf="segmentoActual === 'menores'">
+    <div *ngIf="segmentoActual === 'menores'" class="animate-fade">
+      <div class="cards-grid">
         <div class="tarot-card-text minor" *ngFor="let carta of arcanosMenores" (click)="abrirDetalle(carta)">
           <div class="card-header-minor">
             <span class="suit-name">{{ carta.palo }}</span>
@@ -47,52 +55,92 @@
             <p class="card-keyword">{{ carta.palabra }}</p>
           </div>
         </div>
-      </ng-container>
-
+      </div>
     </div>
 
-    <ion-modal [isOpen]="isModalOpen" (didDismiss)="cerrarModal()" class="card-modal">
-      <ng-template>
-        <ion-header class="ion-no-border">
-          <ion-toolbar style="--background: #1a1a1a;">
-            <ion-title class="modal-header-title">{{ cartaSeleccionada?.nombre }}</ion-title>
-            <ion-buttons slot="end">
-              <ion-button (click)="cerrarModal()" color="light">
-                <ion-icon name="close"></ion-icon>
-              </ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-        </ion-header>
+    <div *ngIf="segmentoActual === 'tiradas'" class="animate-fade">
+      <div class="spread-list">
         
-        <ion-content class="modal-content">
-          <div class="detail-container ion-padding">
-            
+        <div class="spread-item" *ngFor="let tirada of listaTiradas" (click)="abrirTirada(tirada)">
+          <div class="spread-icon-box">
+            <ion-icon [name]="tirada.icono"></ion-icon>
+          </div>
+          <div class="spread-info">
+            <h3>{{ tirada.nombre }}</h3>
+            <p>{{ tirada.subtitulo }}</p>
+          </div>
+          <div class="arrow-icon">➜</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <ion-modal [isOpen]="isModalOpen" (didDismiss)="cerrarModal()" class="card-modal">
+    <ng-template>
+      
+      <ion-header class="ion-no-border">
+        <ion-toolbar style="--background: #1a1a1a;">
+          <ion-title class="modal-header-title">
+            {{ cartaSeleccionada ? cartaSeleccionada.nombre : tiradaSeleccionada?.nombre }}
+          </ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cerrarModal()" color="light">
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      
+      <ion-content class="modal-content">
+        <div class="detail-container ion-padding">
+
+          <div *ngIf="cartaSeleccionada">
             <div class="hero-number-container">
-              <span *ngIf="cartaSeleccionada?.romano" class="hero-roman">{{ cartaSeleccionada.romano }}</span>
-              <span *ngIf="!cartaSeleccionada?.romano" class="hero-icon">🔮</span>
+              <span *ngIf="cartaSeleccionada.romano" class="hero-roman">{{ cartaSeleccionada.romano }}</span>
+              <span *ngIf="!cartaSeleccionada.romano" class="hero-icon">⚔️</span>
             </div>
 
             <div class="story-section">
               <div class="section-label">✦ LA ESENCIA ✦</div>
-              <p class="story-text">
-                "{{ cartaSeleccionada?.historia }}"
-              </p>
+              <p class="story-text">"{{ cartaSeleccionada.historia }}"</p>
             </div>
 
             <div class="meaning-box upright">
               <h3><ion-icon name="arrow-up-circle"></ion-icon> Al Derecho</h3>
-              <p>{{ cartaSeleccionada?.derecho }}</p>
+              <p>{{ cartaSeleccionada.derecho }}</p>
             </div>
 
             <div class="meaning-box reversed">
               <h3><ion-icon name="arrow-down-circle"></ion-icon> Invertida</h3>
-              <p>{{ cartaSeleccionada?.reves }}</p>
+              <p>{{ cartaSeleccionada.reves }}</p>
+            </div>
+          </div>
+
+          <div *ngIf="tiradaSeleccionada">
+            
+            <div class="spread-intro">
+              <ion-icon [name]="tiradaSeleccionada.icono" class="big-spread-icon"></ion-icon>
+              <p class="spread-description">{{ tiradaSeleccionada.descripcion }}</p>
+            </div>
+
+            <div class="positions-list">
+              <h4 class="positions-title">✦ Esquema & Posiciones ✦</h4>
+              
+              <div class="position-item" *ngFor="let pos of tiradaSeleccionada.posiciones">
+                <div class="pos-number">{{ pos.num }}</div>
+                <div class="pos-details">
+                  <h5>{{ pos.sig }}</h5>
+                  <p>{{ pos.det }}</p>
+                </div>
+              </div>
             </div>
 
           </div>
-        </ion-content>
-      </ng-template>
-    </ion-modal>
 
-  </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterLink } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { close, albums, grid, heart, helpCircle, arrowUpCircle, arrowDownCircle } from 'ionicons/icons';
 
 @Component({
   selector: 'app-temas',
@@ -15,7 +17,10 @@ export class TemasPage implements OnInit {
   
   segmentoActual: string = 'mayores';
   isModalOpen: boolean = false;
+  
+  // Variables para el contenido del modal
   cartaSeleccionada: any = null;
+  tiradaSeleccionada: any = null;
 
   // --- ARCANOS MAYORES (22 Cartas) ---
   arcanosMayores = [
@@ -110,7 +115,63 @@ export class TemasPage implements OnInit {
     { palo: 'Oros', nombre: 'Rey de Oros', palabra: 'Éxito', historia: 'La cima del éxito material.', derecho: 'Riqueza, negocios.', reves: 'Codicia, corrupción.' },
   ];
 
-  constructor() { }
+  // --- LISTA DE TIRADAS ---
+  listaTiradas = [
+    {
+      nombre: 'Tres Cartas',
+      subtitulo: 'Pasado, Presente, Futuro',
+      icono: 'albums',
+      descripcion: 'La tirada más clásica y versátil. Perfecta para respuestas rápidas o ver la evolución lineal de un problema.',
+      posiciones: [
+        { num: 1, sig: 'El Pasado', det: 'La causa raíz o influencias pasadas que afectan el ahora.' },
+        { num: 2, sig: 'El Presente', det: 'La situación actual, cómo te sientes o qué está ocurriendo.' },
+        { num: 3, sig: 'El Futuro', det: 'El desenlace probable si sigues el camino actual.' }
+      ]
+    },
+    {
+      nombre: 'La Cruz Celta',
+      subtitulo: 'Análisis Profundo',
+      icono: 'grid',
+      descripcion: 'Una de las tiradas más antiguas y completas. Cubre todos los aspectos de una situación.',
+      posiciones: [
+        { num: 1, sig: 'Situación Presente', det: 'El corazón del asunto.' },
+        { num: 2, sig: 'El Desafío', det: 'Lo que cruza o bloquea la situación.' },
+        { num: 3, sig: 'La Base', det: 'El fundamento subconsciente o pasado lejano.' },
+        { num: 4, sig: 'El Pasado Reciente', det: 'Eventos que acaban de ocurrir.' },
+        { num: 5, sig: 'La Corona', det: 'Tus aspiraciones conscientes o lo mejor que puedes lograr.' },
+        { num: 6, sig: 'El Futuro Inmediato', det: 'Lo que viene muy pronto.' },
+        { num: 7, sig: 'Tú mismo', det: 'Tu actitud hacia el tema.' },
+        { num: 8, sig: 'El Entorno', det: 'Cómo te ven los demás o influencias externas.' },
+        { num: 9, sig: 'Esperanzas y Miedos', det: 'Tus deseos profundos o ansiedades.' },
+        { num: 10, sig: 'Resultado Final', det: 'La conclusión a largo plazo.' }
+      ]
+    },
+    {
+      nombre: 'Tirada del Amor',
+      subtitulo: 'Dinámica de Pareja',
+      icono: 'heart',
+      descripcion: 'Diseñada para entender la conexión entre dos personas.',
+      posiciones: [
+        { num: 1, sig: 'Tú', det: 'Lo que aportas a la relación y cómo te sientes.' },
+        { num: 2, sig: 'La otra persona', det: 'Sus sentimientos y actitud hacia ti.' },
+        { num: 3, sig: 'La Relación', det: 'La energía que crean juntos o el estado actual del vínculo.' },
+        { num: 4, sig: 'Consejo', det: 'Lo que debes hacer para mejorar la armonía.' }
+      ]
+    },
+    {
+      nombre: 'Tirada Sí o No',
+      subtitulo: 'Respuesta Directa',
+      icono: 'help-circle',
+      descripcion: 'Para preguntas concretas. Se sacan 3 o 5 cartas.',
+      posiciones: [
+        { num: 'X', sig: 'Interpretación', det: 'Si salen más cartas al derecho, es un SÍ. Si salen más invertidas, es un NO. Los Arcanos Mayores tienen más peso.' }
+      ]
+    }
+  ];
+
+  constructor() { 
+    addIcons({ close, albums, grid, heart, helpCircle, arrowUpCircle, arrowDownCircle });
+  }
 
   ngOnInit() {}
 
@@ -121,11 +182,20 @@ export class TemasPage implements OnInit {
   // --- MÉTODOS DEL MODAL ---
   abrirDetalle(carta: any) {
     this.cartaSeleccionada = carta;
+    this.tiradaSeleccionada = null; // Reseteamos tirada
+    this.isModalOpen = true;
+  }
+
+  // NUEVO: Método para abrir tirada
+  abrirTirada(tirada: any) {
+    this.tiradaSeleccionada = tirada;
+    this.cartaSeleccionada = null; // Reseteamos carta
     this.isModalOpen = true;
   }
 
   cerrarModal() {
     this.isModalOpen = false;
     this.cartaSeleccionada = null;
+    this.tiradaSeleccionada = null;
   }
 }
