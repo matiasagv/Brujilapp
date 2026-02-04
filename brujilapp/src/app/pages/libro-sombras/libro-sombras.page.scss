@@ -1,0 +1,105 @@
+// Importamos fuentes: Cinzel (Títulos), Lato (Cuerpo) y una cursiva para escribir
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@300;400&family=Satisfy&display=swap');
+
+ion-content {
+  // Mismo fondo místico del Home
+  --background: radial-gradient(circle at 50% 10%, #2a0a38 0%, #0d0214 40%, #000000 100%);
+  font-family: 'Lato', sans-serif;
+}
+
+.main-container {
+  min-height: 100%;
+  padding-bottom: 40px;
+}
+
+// --- ÁREA DE ESCRITURA (PERGAMINO) ---
+.parchment-container {
+  background: #f0e6d2; // Color hueso/pergamino antiguo
+  border-radius: 8px;
+  padding: 5px; // Un borde interno
+  box-shadow: 
+    inset 0 0 30px rgba(0,0,0,0.2), // Sombra interna para dar volumen
+    0 0 15px rgba(212, 175, 55, 0.3); // Resplandor dorado externo
+  border: 1px solid #d4af37; // Borde dorado fino
+  margin-bottom: 25px;
+  position: relative;
+
+  // Un detalle de "sello" o adorno en la esquina (opcional)
+  &::after {
+    content: '✦';
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    color: #d4af37;
+    font-size: 1.5rem;
+    opacity: 0.5;
+  }
+}
+
+.grimoire-textarea {
+  --background: transparent; // Hacemos transparente el fondo del input de Ionic
+  --padding-start: 15px;
+  --padding-end: 15px;
+  --padding-top: 15px;
+  --padding-bottom: 15px;
+  --placeholder-color: #8b7d6b; // Color marrón para el placeholder
+  --color: #3e2723; // Color marrón oscuro para el texto escrito
+
+  font-family: 'Satisfy', cursive; // Fuente estilo escritura a mano
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+// --- BOTÓN MÁGICO (Igual que el del Home) ---
+.magic-button {
+  --background: linear-gradient(to right, #2e0e36, #4a148c);
+  --border-radius: 4px;
+  --border-color: #d4af37;
+  --border-width: 1px;
+  --border-style: solid;
+  --box-shadow: 0 0 15px rgba(74, 20, 140, 0.5);
+  --color: #d4af37;
+
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 1rem;
+  height: 55px;
+  margin-bottom: 30px;
+}
+
+// --- LISTA DE ENTRADAS ---
+.list-title {
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  color: #d4af37;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.entry-paper {
+  background: #f0e6d2; // Color pergamino
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+  border-left: 3px solid #d4af37; // Borde dorado a la izquierda
+  position: relative;
+
+  .entry-text {
+    font-family: 'Satisfy', cursive;
+    color: #3e2723;
+    font-size: 1.1rem;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  // Pequeña línea divisoria decorativa
+  .paper-divider {
+    height: 1px;
+    background: rgba(139, 125, 107, 0.3);
+    margin-top: 10px;
+    width: 50px;
+  }
+}

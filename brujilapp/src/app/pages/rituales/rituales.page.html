@@ -1,0 +1,46 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: transparent;">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="font-family: 'Cinzel', serif; color: #d4af37; font-size: 1rem;">
+      GRIMORIO DE RITUALES
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="main-container ion-padding">
+    
+    <p class="intro-text">Selecciona una intención para revelar sus secretos.</p>
+
+    <ion-accordion-group expand="inset" mode="ios">
+      
+      <ion-accordion *ngFor="let cat of categorias" [value]="cat.nombre" class="magic-accordion">
+        
+        <ion-item slot="header" lines="none" class="accordion-header">
+          <ion-icon [name]="cat.icono" slot="start" [color]="cat.color"></ion-icon>
+          <ion-label style="font-family: 'Cinzel', serif;">{{ cat.nombre }}</ion-label>
+        </ion-item>
+
+        <div class="ion-padding" slot="content" style="background: rgba(0,0,0,0.4);">
+          
+          <div *ngFor="let hechizo of cat.hechizos" class="spell-card">
+            <h3 class="spell-title">✦ {{ hechizo.titulo }}</h3>
+            <p class="spell-materials">
+              <strong>Ingredientes:</strong> {{ hechizo.materiales }}
+            </p>
+            <p class="spell-steps">
+              {{ hechizo.pasos }}
+            </p>
+            <div class="spell-divider"></div>
+          </div>
+
+        </div>
+
+      </ion-accordion>
+
+    </ion-accordion-group>
+
+  </div>
+</ion-content>

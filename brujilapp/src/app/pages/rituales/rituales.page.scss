@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@300;400&display=swap');
+
+ion-content {
+  --background: radial-gradient(circle at 50% 10%, #2a0a38 0%, #0d0214 40%, #000000 100%);
+  font-family: 'Lato', sans-serif;
+}
+
+.main-container {
+  min-height: 100%;
+}
+
+.intro-text {
+  text-align: center;
+  color: #a8a8a8;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+// --- ESTILO DEL ACORDEÓN ---
+ion-accordion-group {
+  ion-accordion {
+    background: rgba(30, 30, 30, 0.8);
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(156, 39, 176, 0.3); // Borde morado sutil
+    overflow: hidden;
+
+    &.accordion-expanding, &.accordion-expanded {
+      border-color: #d4af37; // Se vuelve dorado al abrir
+      background: rgba(40, 40, 40, 0.9);
+    }
+  }
+
+  // Cabecera (El botón que se toca)
+  .accordion-header {
+    --background: transparent;
+    --color: #fff;
+    font-weight: 700;
+    
+    ion-icon {
+      font-size: 1.2rem;
+      margin-right: 10px;
+    }
+  }
+}
+
+// --- ESTILO DEL HECHIZO INDIVIDUAL ---
+.spell-card {
+  margin-bottom: 20px;
+  color: #e0e0e0;
+
+  .spell-title {
+    font-family: 'Cinzel', serif;
+    color: #d4af37; // Título dorado
+    margin-top: 0;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+  }
+
+  .spell-materials {
+    font-size: 0.9rem;
+    color: #bbb;
+    margin-bottom: 8px;
+    
+    strong {
+      color: #9c27b0; // "Ingredientes:" en morado
+    }
+  }
+
+  .spell-steps {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-align: justify;
+  }
+
+  // Línea separadora entre hechizos
+  .spell-divider {
+    height: 1px;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 100%);
+    margin-top: 15px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

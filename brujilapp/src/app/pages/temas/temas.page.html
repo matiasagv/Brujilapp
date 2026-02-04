@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home" color="light"></ion-back-button>
     </ion-buttons>
-    <ion-title style="font-family: 'Cinzel', serif; color: #e0d1ff; font-size: 0.9rem; letter-spacing: 2px;">
+    <ion-title style="font-family: 'Cinzel', serif; color: #e0d1ff; font-size: 0.9rem;">
       BIBLIOTECA TAROT
     </ion-title>
   </ion-toolbar>
@@ -24,7 +24,7 @@
     <div class="cards-grid">
       
       <ng-container *ngIf="segmentoActual === 'mayores'">
-        <div class="tarot-card-text" *ngFor="let carta of arcanosMayores">
+        <div class="tarot-card-text" *ngFor="let carta of arcanosMayores" (click)="abrirDetalle(carta)">
           <div class="card-header">
             <span class="roman-num">{{ carta.romano }}</span>
           </div>
@@ -37,7 +37,7 @@
       </ng-container>
 
       <ng-container *ngIf="segmentoActual === 'menores'">
-        <div class="tarot-card-text minor" *ngFor="let carta of arcanosMenores">
+        <div class="tarot-card-text minor" *ngFor="let carta of arcanosMenores" (click)="abrirDetalle(carta)">
           <div class="card-header-minor">
             <span class="suit-name">{{ carta.palo }}</span>
           </div>
@@ -50,6 +50,49 @@
       </ng-container>
 
     </div>
+
+    <ion-modal [isOpen]="isModalOpen" (didDismiss)="cerrarModal()" class="card-modal">
+      <ng-template>
+        <ion-header class="ion-no-border">
+          <ion-toolbar style="--background: #1a1a1a;">
+            <ion-title class="modal-header-title">{{ cartaSeleccionada?.nombre }}</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="cerrarModal()" color="light">
+                <ion-icon name="close"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        
+        <ion-content class="modal-content">
+          <div class="detail-container ion-padding">
+            
+            <div class="hero-number-container">
+              <span *ngIf="cartaSeleccionada?.romano" class="hero-roman">{{ cartaSeleccionada.romano }}</span>
+              <span *ngIf="!cartaSeleccionada?.romano" class="hero-icon">🔮</span>
+            </div>
+
+            <div class="story-section">
+              <div class="section-label">✦ LA ESENCIA ✦</div>
+              <p class="story-text">
+                "{{ cartaSeleccionada?.historia }}"
+              </p>
+            </div>
+
+            <div class="meaning-box upright">
+              <h3><ion-icon name="arrow-up-circle"></ion-icon> Al Derecho</h3>
+              <p>{{ cartaSeleccionada?.derecho }}</p>
+            </div>
+
+            <div class="meaning-box reversed">
+              <h3><ion-icon name="arrow-down-circle"></ion-icon> Invertida</h3>
+              <p>{{ cartaSeleccionada?.reves }}</p>
+            </div>
+
+          </div>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
 
   </div>
 </ion-content>

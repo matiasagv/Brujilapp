@@ -1,22 +1,39 @@
-<ion-content class="ion-padding">
-  <h3>Tu Libro de Sombras 🌑</h3>
-  
-  <ion-textarea 
-    label="Escribe tu hechizo o pensamiento..." 
-    labelPlacement="floating" 
-    fill="outline" 
-    [(ngModel)]="nuevoHechizo"
-    rows="6">
-  </ion-textarea>
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: transparent;">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" color="warning"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="font-family: 'Cinzel', serif; color: #d4af37; letter-spacing: 2px;">
+      TU GRIMORIO PERSONAL
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <ion-button expand="block" (click)="guardarEntrada()" class="ion-margin-top">
-    Guardar en el Libro
-  </ion-button>
+<ion-content [fullscreen]="true">
+  <div class="main-container ion-padding">
 
-  <ion-list>
-    <ion-list-header>Entradas Anteriores</ion-list-header>
-    <ion-item *ngFor="let entrada of entradas">
-      <ion-label class="ion-text-wrap">{{ entrada }}</ion-label>
-    </ion-item>
-  </ion-list>
+    <div class="parchment-container">
+      <ion-textarea 
+        placeholder="Escribe aquí tu hechizo, sueño o intención..." 
+        [(ngModel)]="nuevoHechizo"
+        rows="10"
+        class="grimoire-textarea">
+      </ion-textarea>
+    </div>
+
+    <ion-button expand="block" (click)="guardarEntrada()" class="magic-button">
+      <ion-icon name="save" slot="start"></ion-icon>
+      Sellar en el Libro
+    </ion-button>
+
+    <div class="entries-list">
+      <h3 class="list-title">✦ Entradas Anteriores ✦</h3>
+      
+      <div *ngFor="let entrada of entradas" class="entry-paper">
+        <p class="entry-text">{{ entrada }}</p>
+        <div class="paper-divider"></div>
+      </div>
+    </div>
+
+  </div>
 </ion-content>
