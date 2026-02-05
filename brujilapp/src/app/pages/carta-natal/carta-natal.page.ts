@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { RouterLink } from '@angular/router';
 import * as Astronomy from 'astronomy-engine';
 import { addIcons } from 'ionicons';
 import { planet, refresh, calendarOutline, timeOutline, eye, heart, flame, chatbubbles } from 'ionicons/icons';
@@ -12,7 +11,7 @@ import { planet, refresh, calendarOutline, timeOutline, eye, heart, flame, chatb
   templateUrl: './carta-natal.page.html',
   styleUrls: ['./carta-natal.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterLink]
+  imports: [IonicModule, CommonModule, FormsModule]
 })
 export class CartaNatalPage implements OnInit {
 
