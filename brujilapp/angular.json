@@ -77,14 +77,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "optimization": {
-                "scripts": true,
-                "styles": {
-                  "minify": true,
-                  "inlineCritical": true
-                },
-                "fonts": false
-              },
+              "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true

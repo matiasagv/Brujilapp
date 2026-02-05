@@ -1,10 +1,10 @@
-<ion-content [fullscreen]="true" scroll-y="false">
+<ion-content [fullscreen]="true">
   
   <div class="stars-bg"></div>
 
   <div class="main-container">
     
-    <div class="hero-section">
+    <div class="hero-section ion-padding-top">
       <div class="moon-container">
         <img [src]="imagenFase" alt="Fase Lunar" class="real-moon-image">
         <div class="moon-glow"></div>
@@ -18,7 +18,7 @@
       </p>
     </div>
 
-    <div class="cards-container">
+    <div class="cards-container ion-padding">
       
       <ion-card routerLink="/temas" class="mystic-card tarot-card">
         <div class="card-bg"></div>
@@ -26,10 +26,8 @@
           <div class="icon-box">
             <img src="assets/tarotlog-removebg.png" alt="Icono Tarot">
           </div>
-          <div class="card-text">
-            <ion-card-title>Oráculo & Tarot</ion-card-title>
-            <ion-card-subtitle>Lectura de Arcanos</ion-card-subtitle>
-          </div>
+          <ion-card-title>Oráculo & Tarot</ion-card-title>
+          <ion-card-subtitle>Lectura de Arcanos</ion-card-subtitle>
         </ion-card-header>
       </ion-card>
 
@@ -39,23 +37,8 @@
           <div class="icon-box purple">
             <img src="assets/altarlog-removebg.png" alt="Icono Altares">
           </div>
-          <div class="card-text">
-            <ion-card-title>Rituales</ion-card-title>
-            <ion-card-subtitle>Prácticas y Conexión</ion-card-subtitle>
-          </div>
-        </ion-card-header>
-      </ion-card>
-
-      <ion-card button routerLink="/carta-natal" class="mystic-card astral-card">
-        <div class="card-bg"></div>
-        <ion-card-header>
-          <div class="icon-box gold">
-            <ion-icon name="planet"></ion-icon>
-          </div>
-          <div class="card-text">
-            <ion-card-title>Carta Astral</ion-card-title>
-            <ion-card-subtitle>Tu Matriz de Nacimiento</ion-card-subtitle>
-          </div>
+          <ion-card-title>Rituales</ion-card-title>
+          <ion-card-subtitle>Prácticas y Conexión</ion-card-subtitle>
         </ion-card-header>
       </ion-card>
 
@@ -66,7 +49,7 @@
         <div class="grimoire-border"></div>
         <ion-button fill="clear" class="grimoire-btn">
           <ion-icon name="journal" slot="start"></ion-icon>
-          Abrir Grimorio
+          Abrir Grimorio Personal
         </ion-button>
       </div>
 
