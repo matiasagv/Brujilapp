@@ -22,4 +22,8 @@ export const routes: Routes = [
     path: 'rituales',
     loadComponent: () => import('./pages/rituales/rituales.page').then( m => m.RitualesPage)
   },
+  {
+    path: 'carta-natal',
+    loadComponent: () => import('./pages/carta-natal/carta-natal.page').then( m => m.CartaNatalPage)
+  },
 ];

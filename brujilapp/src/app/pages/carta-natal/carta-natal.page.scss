@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@300;400&display=swap');
+
+ion-content {
+  --background: radial-gradient(circle at 50% 10%, #1a0525 0%, #000000 100%);
+  font-family: 'Lato', sans-serif;
+}
+
+.stars-bg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  background-image: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px);
+  background-size: 550px 550px;
+  opacity: 0.4;
+  z-index: 0; 
+}
+
+.main-container {
+  min-height: 100%;
+  position: relative;
+  z-index: 1; 
+}
+
+.intro {
+  text-align: center;
+  color: #ccc;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  color: #9c27b0;
+  margin: 25px 0 15px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+}
+
+// --- FORMULARIO ---
+.magic-input {
+  --background: rgba(255, 255, 255, 0.05);
+  --color: #fff;
+  --placeholder-color: #777;
+  --border-radius: 8px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(156, 39, 176, 0.3);
+
+  ion-label {
+    font-family: 'Cinzel', serif;
+    color: #d4af37 !important;
+  }
+}
+
+.fake-input {
+  padding-top: 5px;
+  font-size: 1rem;
+  color: #fff;
+  width: 100%;
+  .placeholder-text { color: #777; font-style: italic; }
+}
+
+.input-icon { color: #d4af37; opacity: 0.7; }
+
+.magic-button {
+  --background: linear-gradient(90deg, #4a148c, #7b1fa2);
+  --color: #d4af37;
+  font-family: 'Cinzel', serif;
+  margin-top: 30px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+// --- MODAL DE FECHA (ARREGLO DE COLORES) ---
+ion-modal.datetime-modal {
+  --width: fit-content;
+  --min-width: 250px;
+  --height: fit-content;
+  --border-radius: 16px;
+  --background: transparent;
+
+  ion-datetime {
+    // Fondo Morado Oscuro
+    --background: #14041c; 
+    
+    // Texto General (Dorado para que resalte)
+    color: #d4af37; 
+    
+    // Forzamos el color del texto base de Ionic
+    --ion-text-color: #d4af37;
+    
+    // Título y elementos
+    --title-color: #d4af37;
+    
+    border-radius: 16px;
+    border: 1px solid #d4af37;
+
+    // Ajuste específico para los días del calendario
+    &::part(calendar-day) {
+      color: #fff; // Días en blanco para leer mejor
+    }
+    &::part(calendar-day active) {
+      background: #d4af37;
+      color: #000; // Día seleccionado negro
+      font-weight: bold;
+    }
+    &::part(wheel-item) {
+      color: #d4af37; // Ruedas de la hora en dorado
+    }
+  }
+}
+
+// --- RESULTADOS ---
+.chart-header {
+  text-align: center;
+  margin-bottom: 20px;
+  h2 { font-family: 'Cinzel', serif; color: #d4af37; margin: 0; }
+  p { color: #aaa; margin: 5px 0 0; }
+}
+
+.planet-card {
+  background: rgba(30, 30, 30, 0.8);
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.1);
+
+  .planet-icon {
+    font-size: 2.5rem;
+    width: 50px; text-align: center;
+  }
+
+  .planet-info {
+    h3 { margin: 0; font-size: 0.8rem; color: #aaa; text-transform: uppercase; letter-spacing: 1px; }
+    .sign-name { font-family: 'Cinzel', serif; font-size: 1.4rem; color: #fff; font-weight: 700; margin: 2px 0; }
+    .element { font-size: 0.8rem; color: #d4af37; }
+    .desc { font-size: 0.85rem; color: #ccc; margin-top: 3px; line-height: 1.2; font-style: italic; }
+  }
+
+  &.sun { border-color: rgba(255, 215, 0, 0.4); .planet-icon { color: #ffd700; } }
+  &.moon { border-color: rgba(192, 192, 192, 0.4); .planet-icon { color: #e0e0e0; } }
+  &.asc { border-color: rgba(156, 39, 176, 0.4); .planet-icon { color: #ab47bc; } }
+}
+
+// --- MINI GRID PARA PLANETAS PERSONALES ---
+.mini-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.mini-card {
+  background: rgba(20, 20, 20, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 15px 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  ion-icon { font-size: 1.5rem; margin-bottom: 5px; }
+  h4 { margin: 0; font-size: 0.65rem; color: #888; letter-spacing: 1px; }
+  .mini-sign { font-family: 'Cinzel', serif; font-size: 0.9rem; color: #fff; font-weight: 700; margin: 3px 0; }
+  .mini-desc { font-size: 0.7rem; color: #d4af37; }
+
+  &.mercury ion-icon { color: #81d4fa; }
+  &.venus ion-icon { color: #f48fb1; }
+  &.mars ion-icon { color: #ef5350; }
+}
+
+.retry-btn { margin-top: 20px; width: 100%; }
+.animate-fade { animation: fadeIn 0.8s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }

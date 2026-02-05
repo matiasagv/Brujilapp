@@ -1,0 +1,164 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: transparent;">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" color="warning" text="Atrás"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="font-family: 'Cinzel', serif; color: #d4af37;">
+      MATRIZ ASTRAL
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="stars-bg"></div>
+  
+  <div class="main-container ion-padding">
+
+    <div class="natal-form" *ngIf="!resultado">
+      <p class="intro">Ingresa tus coordenadas exactas (o localidad) para revelar tu mapa cósmico.</p>
+
+      <ion-item class="magic-input">
+        <ion-label position="stacked">Nombre Completo</ion-label>
+        <ion-input [(ngModel)]="nombre" placeholder="Ej: Sixela"></ion-input>
+      </ion-item>
+
+      <ion-item class="magic-input" button="true" id="trigger-fecha">
+        <ion-label position="stacked">Fecha de Nacimiento</ion-label>
+        <div class="fake-input">
+          <span *ngIf="fechaNacimiento">{{ fechaNacimiento | date:'dd/MM/yyyy' }}</span>
+          <span *ngIf="!fechaNacimiento" class="placeholder-text">Toca para elegir fecha</span>
+        </div>
+        <ion-icon name="calendar-outline" slot="end" class="input-icon"></ion-icon>
+      </ion-item>
+      
+      <ion-modal trigger="trigger-fecha" class="datetime-modal">
+        <ng-template>
+          <ion-datetime presentation="date" [(ngModel)]="fechaNacimiento"></ion-datetime>
+        </ng-template>
+      </ion-modal>
+
+      <ion-item class="magic-input" button="true" id="trigger-hora">
+        <ion-label position="stacked">Hora Exacta</ion-label>
+        <div class="fake-input">
+          <span *ngIf="horaNacimiento">{{ horaNacimiento | date:'HH:mm' }}</span>
+          <span *ngIf="!horaNacimiento" class="placeholder-text">Toca para elegir hora</span>
+        </div>
+        <ion-icon name="time-outline" slot="end" class="input-icon"></ion-icon>
+      </ion-item>
+
+      <ion-modal trigger="trigger-hora" class="datetime-modal">
+        <ng-template>
+          <ion-datetime presentation="time" [(ngModel)]="horaNacimiento"></ion-datetime>
+        </ng-template>
+      </ion-modal>
+
+      <ion-item class="magic-input">
+        <ion-label position="stacked">Lugar de Nacimiento</ion-label>
+        <ion-select placeholder="Selecciona Ciudad" (ionChange)="seleccionarCiudad($event)">
+          <ion-select-option *ngFor="let ciudad of ciudades" [value]="ciudad">
+            {{ ciudad.nombre }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div *ngIf="latitud === 0 && longitud === 0" class="manual-coords">
+        <p class="hint">Si tu ciudad no está, ingresa coordenadas manuales:</p>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-item class="magic-input small">
+                <ion-label position="stacked">Latitud</ion-label>
+                <ion-input type="number" [(ngModel)]="latitud"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item class="magic-input small">
+                <ion-label position="stacked">Longitud</ion-label>
+                <ion-input type="number" [(ngModel)]="longitud"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+
+      <ion-button expand="block" class="magic-button" (click)="calcularCartaReal()">
+        <ion-icon name="planet" slot="start"></ion-icon>
+        Revelar Carta
+      </ion-button>
+    </div>
+
+    <div class="result-container animate-fade" *ngIf="resultado">
+      
+      <div class="chart-header">
+        <h2>Mapa de {{ resultado.nombre }}</h2>
+        <p>{{ resultado.fecha }}</p>
+      </div>
+
+      <div class="section-title">✦ La Trinidad ✦</div>
+
+      <div class="planet-card sun">
+        <div class="planet-icon">☀️</div>
+        <div class="planet-info">
+          <h3>TU SOL (Esencia)</h3>
+          <div class="sign-name">{{ resultado.sol.nombre }}</div>
+          <p class="element">{{ resultado.sol.elemento }} • Grado {{ resultado.sol.grado }}°</p>
+          <p class="desc">Tu yo verdadero, vitalidad y propósito.</p>
+        </div>
+      </div>
+
+      <div class="planet-card moon">
+        <div class="planet-icon">🌙</div>
+        <div class="planet-info">
+          <h3>TU LUNA (Alma)</h3>
+          <div class="sign-name">{{ resultado.luna.nombre }}</div>
+          <p class="element">{{ resultado.luna.elemento }} • Grado {{ resultado.luna.grado }}°</p>
+          <p class="desc">Tus emociones, refugio e instintos.</p>
+        </div>
+      </div>
+
+      <div class="planet-card asc">
+        <div class="planet-icon">
+          <ion-icon name="eye"></ion-icon>
+        </div>
+        <div class="planet-info">
+          <h3>TU ASCENDENTE (Máscara)</h3>
+          <div class="sign-name">{{ resultado.ascendente.nombre }}</div>
+          <p class="element">{{ resultado.ascendente.elemento }} • Grado {{ resultado.ascendente.grado }}°</p>
+          <p class="desc">Cómo te ven los demás y tu destino.</p>
+        </div>
+      </div>
+
+      <div class="section-title">✦ Planetas Personales ✦</div>
+      
+      <div class="mini-grid">
+        <div class="mini-card mercury">
+          <ion-icon name="chatbubbles"></ion-icon>
+          <h4>MERCURIO</h4>
+          <span class="mini-sign">{{ resultado.mercurio.nombre }}</span>
+          <span class="mini-desc">Mente</span>
+        </div>
+        
+        <div class="mini-card venus">
+          <ion-icon name="heart"></ion-icon>
+          <h4>VENUS</h4>
+          <span class="mini-sign">{{ resultado.venus.nombre }}</span>
+          <span class="mini-desc">Amor</span>
+        </div>
+
+        <div class="mini-card mars">
+          <ion-icon name="flame"></ion-icon>
+          <h4>MARTE</h4>
+          <span class="mini-sign">{{ resultado.marte.nombre }}</span>
+          <span class="mini-desc">Acción</span>
+        </div>
+      </div>
+
+      <ion-button fill="clear" color="light" (click)="resultado = null" class="retry-btn">
+        <ion-icon name="refresh" slot="start"></ion-icon>
+        Calcular otra
+      </ion-button>
+
+    </div>
+
+  </div>
+</ion-content>

@@ -25,8 +25,8 @@ export class TemasPage implements OnInit {
 
   // --- ARCANOS MAYORES ---
   arcanosMayores = [
-    { numero: '0', romano: '0', nombre: 'El Loco', palabra: 'Inicios • Fe', historia: 'El alma antes de encarnar, llena de inocencia y potencial ilimitado, dando un salto de fe.', derecho: 'Nuevos comienzos, espontaneidad, fe ciega.', reves: 'Imprudencia, riesgos innecesarios.' },
-    { numero: '1', romano: 'I', nombre: 'El Mago', palabra: 'Poder • Acción', historia: 'Canaliza la energía del cielo a la tierra con todas las herramientas a su disposición.', derecho: 'Manifestación, fuerza de voluntad, habilidad.', reves: 'Manipulación, talentos ocultos.' },
+    { numero: '0', romano: '0', nombre: 'El Loco', palabra: 'Inicios • Fe', historia: 'El alma antes de encarnar, llena de inocencia y potencial ilimitado, dando un salto de fe.', derecho: 'Nuevos comienzos, espontaneidad, fe ciega', reves: 'Imprudencia, inmaduro, riesgos innecesarios.' },
+    { numero: '1', romano: 'I', nombre: 'El Mago', palabra: 'Poder • Acción • Manifestación', historia: 'Canaliza la energía vital de la tierra y ocupa todo a su disposición para crear su camino.', derecho: 'Manifestación, fuerza de voluntad, habilidad.', reves: 'Manipulación, talentos ocultos.' },
     { numero: '2', romano: 'II', nombre: 'La Sacerdotisa', palabra: 'Intuición', historia: 'Guardiana de los misterios y el velo del subconsciente.', derecho: 'Intuición, sabiduría interior, misterio.', reves: 'Secretos revelados, desconexión.' },
     { numero: '3', romano: 'III', nombre: 'La Emperatriz', palabra: 'Abundancia', historia: 'La Madre Naturaleza, creadora de vida y belleza sensual.', derecho: 'Fertilidad, naturaleza, abundancia.', reves: 'Bloqueo creativo, dependencia.' },
     { numero: '4', romano: 'IV', nombre: 'El Emperador', palabra: 'Estructura', historia: 'El Padre que trae orden al caos y establece reglas.', derecho: 'Autoridad, estructura, estabilidad.', reves: 'Tiranía, rigidez, dominación.' },
